@@ -39,7 +39,28 @@
       <section class="container" style="max-width: 900px; margin: 0 auto; padding: 2rem 1rem;">
         <div class="card" style="border: 1px solid rgba(26,77,180,0.12); border-radius: 14px; padding: 1.5rem; box-shadow: 0 6px 18px rgba(26,77,180,0.06);">
 <div class="prose" style="line-height:1.65;">
-            <img src="assets/artist.jpg" alt="Artist portrait" style="float:left; width:240px; height:auto; border-radius:50%; margin:0 1rem 1rem 0;" loading="lazy" decoding="async">
+            <picture style="float:left; margin:0 20px 10px 0; display:block; width: 240px; height: 240px; border-radius: 50%; overflow: hidden;">
+  <source
+    type="image/webp"
+    srcset="
+      assets/artist/artist-400.webp 400w,
+      assets/artist/artist-800.webp 800w,
+      assets/artist/artist-1200.webp 1200w,
+      assets/artist/artist-1600.webp 1600w
+    "
+    sizes="240px">
+  <img
+    src="assets/artist/artist-800.jpg"
+    srcset="
+      assets/artist/artist-400.jpg 400w,
+      assets/artist/artist-800.jpg 800w,
+      assets/artist/artist-1200.jpg 1200w,
+      assets/artist/artist-1600.jpg 1600w
+    "
+    sizes="240px"
+    alt="Artist portrait"
+    style="display:block; width: 100%; height: 100%; object-fit: cover;">
+</picture>
             <h2>Hi, I'm Bhavya</h2>
             <p>The ceramic artist behind Kiln Kissed Ceramics, based in California. I create small-batch, handmade pottery that blends function with beauty.</p>
             <p>My work is rooted in a love of vibrant glazes, rich textures, and organic details that give each piece its own unique character. No two pieces are ever exactly the same—each one tells its own story through handmade charm and subtle variations.</p>
