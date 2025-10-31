@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact - Kiln Kissed Ceramics</title>
+<link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+<header>
+<img alt="Kiln Kissed Ceramics Logo" class="logo" src="assets/logo.jpg"/>
+<nav class="nav">
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="shop.html">Shop</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+<div class="cart-right"><a aria-label="Go to Shop" href="shop.html">Cart</a></div>
+</nav>
+</header>
+<main>
+<section>
+<div class="contact-intro"><h2>Contact Us</h2>
+<strong>I’d love to hear from you!</strong>
+<p>For any questions about your order, custom requests, or details about my ceramics, please reach out:</p>
+<p>
+          Instagram: <a href="https://www.instagram.com/kiln.kissed.ceramics" target="_blank">@kiln.kissed.ceramics</a><br/>
+          Email: <a href="mailto:kiln.kissed.ceramics@gmail.com">kiln.kissed.ceramics@gmail.com</a>
+</p>
+<script>
+document.querySelector('.contact-form')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.currentTarget;
+  const data = new FormData(form);
+  const res = await fetch(form.action, { method: form.method, body: data, headers: { 'Accept': 'application/json' }});
+  if (res.ok) { window.location.href = 'thankyou.html'; }
+  else { alert('Oops! There was a problem. Please try again.'); }
+});
+</script></div>
+<form method="POST" action="https://formspree.io/f/xrbozlob">
+<label for="name">Name</label>
+<input id="name" name="name" placeholder="Your name" type="text"/>
+<label for="email">Email</label>
+<input id="email" name="email" placeholder="you@example.com" type="email"/>
+<label for="message">Message</label>
+<textarea id="message" name="message" placeholder="Write your message here" rows="5"></textarea>
+<button type="submit">Send Message</button>
+</form>
+<p style="text-align:center; margin-top:1rem;">I’ll get back to you as soon as I can. Thank you for supporting handmade!</p>
+</section>
+</main>
+<footer>
+<p>© 2025 Kiln Kissed Ceramics</p>
+</footer>
+</body>
+</html>

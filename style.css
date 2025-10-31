@@ -1,0 +1,173 @@
+
+:root {
+  --blue: #1A4DB4;
+  --pink: #E76DBA;
+  --orange: #F0442C;
+  --yellow: #F5B82E;
+  --white: #ffffff;
+  --gray: #f4f4f4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: var(--white);
+  color: var(--blue);
+  line-height: 1.6;
+}
+
+header {
+  text-align: center;
+  padding: 1.5rem 0; /* reduced spacing */
+}
+
+header img {
+  max-width: 500px; /* doubled */
+  height: auto;
+}
+
+nav {
+  margin-top: 0.75rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 3.0rem;
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: var(--blue);
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: var(--pink);
+}
+
+.hero {
+  margin: 0.75rem 0;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+section {
+  padding: 2rem;
+  padding-top: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.grid img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: var(--gray);
+}
+
+form {
+  max-width: 600px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+form input, form textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  width: 100%;
+}
+
+form input:focus, form textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 4px rgba(26,77,180,0.3);
+}
+
+form button {
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: var(--pink);
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  color: var(--blue);
+}
+
+.contact-intro {
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: left;
+  font-size: 1.05rem;
+}
+.contact-intro strong {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.contact-intro a {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+/* === Cart (right-aligned text link) === */
+:root { --pink: #E76DBA; }
+header .nav { position: relative; display: flex; justify-content: center; align-items: center; }
+header .nav ul { list-style: none; display: flex; gap: 2rem; padding: 0; margin: 0; }
+.nav .cart-right { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); }
+.nav .cart-right a { text-decoration: none; font-weight: 700; letter-spacing: 0.02em; line-height: 1; color: inherit; transition: color .18s ease; }
+.nav .cart-right a:hover, .nav .cart-right a:focus { text-decoration: none; color: var(--pink, #E76DBA); }
+.nav .cart-right a:focus-visible { outline: 2px solid rgba(26,77,180,0.35); outline-offset: 2px; }
+@media (max-width: 520px) { .nav .cart-right { right: 0.5rem; } }
+
+/* === Header & Cart (right-aligned text link) === */
+:root { --pink: #E76DBA; }
+header .nav { position: relative; display: flex; justify-content: center; align-items: center; }
+header .nav ul { list-style: none; display: flex; gap: 2rem; padding: 0; margin: 0; }
+.nav .cart-right { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); }
+.nav .cart-right a { text-decoration: none; font-weight: 700; letter-spacing: 0.02em; line-height: 1; color: inherit; transition: color .18s ease; }
+.nav .cart-right a:hover, .nav .cart-right a:focus { text-decoration: none; color: var(--pink, #E76DBA); }
+.nav .cart-right a:focus-visible { outline: 2px solid rgba(26,77,180,0.35); outline-offset: 2px; }
+@media (max-width: 520px) { .nav .cart-right { right: 0.5rem; } }
+/* ---- Minimal additions for About page artist image ---- */
+.prose::after { content: ""; display: table; clear: both; }
+.prose img { max-width: 100%; height: auto; }
