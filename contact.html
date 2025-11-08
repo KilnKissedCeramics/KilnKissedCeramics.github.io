@@ -27,8 +27,8 @@
 <strong>I’d love to hear from you!</strong>
 <p>For any questions about your order, custom requests, or details about my ceramics, please reach out:</p>
 <p>
-          Instagram: <a href="https://www.instagram.com/kiln.kissed.ceramics" target="_blank">@kiln.kissed.ceramics</a><br/>
-          Email: <a href="mailto:kiln.kissed.ceramics@gmail.com">kiln.kissed.ceramics@gmail.com</a>
+<p style="padding-left:1em;">Instagram: <a href="https://www.instagram.com/kiln.kissed.ceramics" target="_blank">@kiln.kissed.ceramics</a><br/></p>
+<p style="padding-left:1em;">Email: <a href="mailto:kiln.kissed.ceramics@gmail.com">kiln.kissed.ceramics@gmail.com</a></p>
 </p>
 <script>
 document.querySelector('.contact-form')?.addEventListener('submit', async (e) => {
@@ -39,8 +39,11 @@ document.querySelector('.contact-form')?.addEventListener('submit', async (e) =>
   if (res.ok) { window.location.href = 'thankyou.html'; }
   else { alert('Oops! There was a problem. Please try again.'); }
 });
-</script></div>
+</script>
+<p>I’ll get back to you as soon as I can!</p>
+</div>
 <form method="POST" action="https://formspree.io/f/xrbozlob">
+<p></p>
 <label for="name">Name</label>
 <input id="name" name="name" placeholder="Your name" type="text"/>
 <label for="email">Email</label>
@@ -49,7 +52,7 @@ document.querySelector('.contact-form')?.addEventListener('submit', async (e) =>
 <textarea id="message" name="message" placeholder="Write your message here" rows="5"></textarea>
 <button type="submit">Send Message</button>
 </form>
-<p style="text-align:center; margin-top:1rem;">I’ll get back to you as soon as I can!</p>
+<p style="text-align:center; margin-top:1rem;"></p>
 </section>
 </main>
 <footer>

@@ -23,7 +23,25 @@
 </header>
 <main>
 <section class="hero">
-<picture><source srcset="assets/banner-800.webp 800w, assets/banner-1600.webp 1600w" type="image/webp"/><img alt="Featured ceramics banner" decoding="async" loading="lazy" sizes="100vw" src="assets/banner-1600.jpg" srcset="assets/banner-800.jpg 800w, assets/banner-1600.jpg 1600w"/></picture>
+<picture>
+  <source type="image/webp" srcset="
+    assets/banner/banner-400.webp 400w,
+    assets/banner/banner-800.webp 800w,
+    assets/banner/banner-1200.webp 1200w,
+    assets/banner/banner-1600.webp 1600w
+  " sizes="100vw">
+  <img
+    src="assets/banner/banner-1200.jpg"
+    srcset="
+      assets/banner/banner-400.jpg 400w,
+      assets/banner/banner-800.jpg 800w,
+      assets/banner/banner-1200.jpg 1200w,
+      assets/banner/banner-1600.jpg 1600w
+    "
+    sizes="100vw"
+    alt="Kiln Kissed Ceramics banner"
+    style="width:100%; height:auto;">
+</picture>
 </section>
 <section class="where-to-buy">
 <h2>Where to Buy in Person</h2>
