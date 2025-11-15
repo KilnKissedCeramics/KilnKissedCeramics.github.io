@@ -171,6 +171,125 @@ header .nav ul { list-style: none; display: flex; gap: 2rem; padding: 0; margin:
 .nav .cart-right a:hover, .nav .cart-right a:focus { text-decoration: none; color: var(--pink, #E76DBA); }
 .nav .cart-right a:focus-visible { outline: 2px solid rgba(26,77,180,0.35); outline-offset: 2px; }
 @media (max-width: 520px) { .nav .cart-right { right: 0.5rem; } }
+
 /* ---- Minimal additions for About page artist image ---- */
 .prose::after { content: ""; display: table; clear: both; }
 .prose img { max-width: 100%; height: auto; }
+
+
+/* =========================================================
+   Desktop / Large Screens (default styles)
+   ---------------------------------------------------------
+   - Existing rules above apply primarily to desktop and
+     larger tablet layouts in landscape.
+   - Mobile-specific overrides are defined in the sections
+     below inside @media queries.
+   ========================================================= */
+
+
+/* =========================================================
+   Mobile - Shared (portrait & landscape)
+   Header logo scaling + navigation width control
+   ---------------------------------------------------------
+   Breakpoint: max-width: 900px
+   Affects:
+   - Smaller laptops when the window is narrow
+   - Tablets (portrait & landscape)
+   - Most phones (both orientations)
+   ========================================================= */
+@media (max-width: 900px) {
+
+  /* Mobile (both orientations): keep header content away from edges */
+  header {
+    padding-inline: 0.75rem;
+  }
+
+  /* Mobile (both orientations): scale and center the logo so it
+     does not dominate the screen on small devices. */
+  header .logo {
+    display: block;
+    max-width: 70vw;       /* Mobile: logo is at most 70% of viewport width */
+    height: auto;
+    margin: 0.75rem auto 1rem;
+  }
+
+  /* Mobile (both orientations): allow nav to wrap so it never
+     forces horizontal scrolling. */
+  header .nav {
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+  }
+
+  /* Mobile (both orientations): reduce spacing between nav links and
+     allow them to wrap onto multiple lines if needed. */
+  header .nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  /* Mobile (both orientations): move the Cart link into normal flow
+     under / near the menu instead of being absolutely positioned
+     on the far right (which can push the header too wide). */
+  .nav .cart-right {
+    position: static;
+    transform: none;
+    margin-top: 0.25rem;
+  }
+}
+
+
+/* =========================================================
+   Mobile - Portrait-only refinements
+   Extra tightening for narrow vertical screens
+   ---------------------------------------------------------
+   Breakpoint: max-width: 600px AND portrait orientation
+   Affects:
+   - Phones held in portrait
+   - Very narrow browser windows on desktop
+   ========================================================= */
+@media (max-width: 600px) and (orientation: portrait) {
+
+  /* Mobile Portrait: ensure nav links use full width and stay centered. */
+  header .nav ul {
+    width: 100%;
+    justify-content: center;
+    /* Mobile Portrait: use same sizing and gap as Mobile Landscape
+       for a consistent look across orientations. */
+    font-size: 0.9rem;
+    gap: 0.5rem 0.75rem;
+  }
+
+  /* Mobile Portrait: keep the column layout but align everything neatly. */
+  header .nav {
+    align-items: center;
+  }
+
+  /* Mobile Portrait: Cart link sits just below the menu with a small gap. */
+  .nav .cart-right {
+    margin-top: 0.25rem;
+  }
+}
+
+
+/* =========================================================
+   Mobile - Landscape-only refinements
+   Slight spacing adjustments for rotated phones
+   ---------------------------------------------------------
+   Breakpoint: max-width: 900px AND landscape orientation
+   Affects:
+   - Phones in landscape
+   - Smaller tablets in landscape
+   ========================================================= */
+@media (max-width: 900px) and (orientation: landscape) {
+
+  /* Mobile Landscape: slightly smaller type and tighter gaps so
+     links stay on-screen without wrapping awkwardly. */
+  header .nav ul {
+    font-size: 0.9rem;
+    gap: 0.5rem 0.75rem;
+  }
+}
