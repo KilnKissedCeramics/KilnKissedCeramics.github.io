@@ -12,7 +12,213 @@
 <link rel="canonical" href="https://kilnkissedceramics.github.io/gallery.html"/>
 
 <link href="style.css" rel="stylesheet"/>
+<style>
+/* Simple lightbox overlay for index banner */
+  .lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+  }
+  .lightbox-overlay.is-open {
+    display: flex;
+  }
+  .lightbox-content {
+    max-width: 94vw;
+    max-height: 94vh;
+    padding: 0.75rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+    position: relative;
+  }
+  .lightbox-image {
+    display: block;
+    max-width: 100%;
+    max-height: 80vh;
+    height: auto;
+    width: auto;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: 1px solid rgba(26,77,180,0.18);
+    background: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: #1A4DB4;
+  }
+  .lightbox-close:focus-visible {
+    outline: 2px solid rgba(26,77,180,0.35);
+    outline-offset: 2px;
+  }
+</style>
 
+
+<style>
+  /* Shared header logo sizing + mobile nav (portrait only) */
+  header img.logo {
+    max-width: 500px; /* base desktop size */
+    height: auto;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-overlay {
+    display: none;
+  }
+
+  .nav-close {
+    display: none;
+  }
+
+  @media (max-width: 768px) and (orientation: portrait) {
+    header {
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    header img.logo {
+      max-width: 275px;
+      height: auto;
+    }
+
+    /* Drawer-style nav on the right */
+    header .nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: 78%;
+      max-width: 320px;
+      background: #ffffff;
+      box-shadow: -4px 0 18px rgba(0, 0, 0, 0.16);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 3rem 1.5rem 2rem;
+      transform: translateX(100%);
+      transition: transform 0.25s ease, opacity 0.2s ease;
+      z-index: 1001;
+    }
+
+    header .nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav .cart-right {
+      position: static;
+      transform: none;
+      margin-top: 2rem;
+    }
+
+    .nav .cart-right a {
+      display: inline-block;
+      padding: 0.5rem 0;
+    }
+
+    .nav-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(26, 77, 180, 0.18);
+      background: #ffffff;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .nav-toggle:focus-visible {
+      outline: 2px solid rgba(26,77,180,0.35);
+      outline-offset: 2px;
+    }
+
+    .nav-toggle-bars {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-toggle-bar {
+      width: 18px;
+      height: 2px;
+      border-radius: 1px;
+      background: #1A4DB4;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(26,77,180,0.18);
+      background: #ffffff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      line-height: 1;
+      color: #1A4DB4;
+    }
+
+    .nav-close:focus-visible {
+      outline: 2px solid rgba(26,77,180,0.35);
+      outline-offset: 2px;
+    }
+
+    body.nav-open header .nav {
+      transform: translateX(0);
+    }
+
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 1000;
+    }
+
+    body.nav-open .nav-overlay {
+      opacity: 1;
+      pointer-events: auto;
+      display: block;
+    }
+  }
+</style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T34TFGC2Q1"></script>
 <script>
@@ -25,8 +231,18 @@
 </head>
 <body>
 <header>
-<img alt="Kiln Kissed Ceramics by Bhavya Kothari" class="logo" src="assets/logo.jpg"/>
-<nav class="nav">
+<div class="header-bar">
+  <img alt="Kiln Kissed Ceramics by Bhavya Kothari" class="logo" src="assets/logo.jpg"/>
+  <button class="nav-toggle" type="button" data-nav-toggle aria-label="Open navigation" aria-expanded="false">
+    <span class="nav-toggle-bars">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </span>
+  </button>
+</div>
+<nav class="nav" aria-label="Main navigation">
+<button class="nav-close" type="button" data-nav-close aria-label="Close navigation">×</button>
 <ul>
 <li><a href="index.html">Home</a></li>
 <li><a href="gallery.html">Gallery</a></li>
@@ -37,14 +253,111 @@
 <div class="cart-right"><a aria-label="Go to Shop" href="shop.html">Cart</a></div>
 </nav>
 </header>
+<div class="nav-overlay" data-nav-overlay></div>
 <main>
 <section>
 <div class="grid" style="display:grid;grid-template-columns:repeat(4, 1fr);gap:1rem;">
-<picture><source srcset="assets/placeholder1-400.webp 400w, assets/placeholder1-800.webp 800w" type="image/webp"/><img alt="Pair of oval ceramic serving platters with small dip bowls in pink and plum glazes arranged on a textured background" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder1-800.jpg" srcset="assets/placeholder1-400.jpg 400w, assets/placeholder1-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder10-400.webp 400w, assets/placeholder10-800.webp 800w" type="image/webp"/><img alt="Blue oval ceramic dish with carved deer silhouette and leaf pattern displayed on a neutral background" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder10-800.jpg" srcset="assets/placeholder10-400.jpg 400w, assets/placeholder10-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder11-400.webp 400w, assets/placeholder11-800.webp 800w" type="image/webp"/><img alt="Small green ceramic dish shaped like a leaf with carved vein texture" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder11-800.jpg" srcset="assets/placeholder11-400.jpg 400w, assets/placeholder11-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder12-400.webp 400w, assets/placeholder12-800.webp 800w" type="image/webp"/><img alt="Pair of scalloped ceramic plates in orange and yellow glazes with raised leaf pattern" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder12-800.jpg" srcset="assets/placeholder12-400.jpg 400w, assets/placeholder12-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder13-400.webp 400w, assets/placeholder13-800.webp 800w" type="image/webp"/><img alt="Set of three heart-shaped ceramic trays with carved leaf pattern in rich red and purple glazes" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder13-800.jpg" srcset="assets/placeholder13-400.jpg 400w, assets/placeholder13-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder14-400.webp 400w, assets/placeholder14-800.webp 800w" type="image/webp"/><img alt="Large round pink ceramic plate with carved flowers and butterflies displayed upright on a stand" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder14-800.jpg" srcset="assets/placeholder14-400.jpg 400w, assets/placeholder14-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder15-400.webp 400w, assets/placeholder15-800.webp 800w" type="image/webp"/><img alt="Large round red ceramic platter with carved wave and leaf pattern presented on a display stand" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder15-800.jpg" srcset="assets/placeholder15-400.jpg 400w, assets/placeholder15-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder16-400.webp 400w, assets/placeholder16-800.webp 800w" type="image/webp"/><img alt="Assortment of five small heart-shaped ceramic dishes in blue, pink, red and orange glazes arranged together" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder16-800.jpg" srcset="assets/placeholder16-400.jpg 400w, assets/placeholder16-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder2-400.webp 400w, assets/placeholder2-800.webp 800w" type="image/webp"/><img alt="Group of five heart-shaped ceramic trays in red and blue leaf and solid glazes styled on a concrete surface" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder2-800.jpg" srcset="assets/placeholder2-400.jpg 400w, assets/placeholder2-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder3-400.webp 400w, assets/placeholder3-800.webp 800w" type="image/webp"/><img alt="Three ornate-edge ceramic trays in soft pink, peach and gray floral patterns displayed beside a potted plant" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder3-800.jpg" srcset="assets/placeholder3-400.jpg 400w, assets/placeholder3-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder4-400.webp 400w, assets/placeholder4-800.webp 800w" type="image/webp"/><img alt="Circle of small pink and burgundy heart-shaped ceramic trinket dishes arranged on wooden boards" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder4-800.jpg" srcset="assets/placeholder4-400.jpg 400w, assets/placeholder4-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder5-400.webp 400w, assets/placeholder5-800.webp 800w" type="image/webp"/><img alt="Large round red ceramic platter with flower pattern" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder5-800.jpg" srcset="assets/placeholder5-400.jpg 400w, assets/placeholder5-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder6-400.webp 400w, assets/placeholder6-800.webp 800w" type="image/webp"/><img alt="Large blue ceramic serving bowl with carved feather pattern styled with wooden salad servers" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder6-800.jpg" srcset="assets/placeholder6-400.jpg 400w, assets/placeholder6-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder7-400.webp 400w, assets/placeholder7-800.webp 800w" type="image/webp"/><img alt="Pair of long oval ceramic serving platters in plum and blue-red glazes surrounded by dried grasses" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder7-800.jpg" srcset="assets/placeholder7-400.jpg 400w, assets/placeholder7-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder8-400.webp 400w, assets/placeholder8-800.webp 800w" type="image/webp"/><img alt="Set of five bird-shaped ceramic dishes with lace texture in blue, green and pink glazes" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder8-800.jpg" srcset="assets/placeholder8-400.jpg 400w, assets/placeholder8-800.jpg 800w"/></picture><picture><source srcset="assets/placeholder9-400.webp 400w, assets/placeholder9-800.webp 800w" type="image/webp"/><img alt="Large round brown ceramic platter with palm tree pattern presented on a display stand" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder9-800.jpg" srcset="assets/placeholder9-400.jpg 400w, assets/placeholder9-800.jpg 800w"/></picture></div>
+<picture><source srcset="assets/placeholder1-400.webp 400w, assets/placeholder1-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Pair of oval ceramic serving platters with small dip bowls in pink and plum glazes arranged on a textured background" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder1-800.jpg" srcset="assets/placeholder1-400.jpg 400w, assets/placeholder1-800.jpg 800w"/ data-full="assets/placeholder1-800.jpg"></picture><picture><source srcset="assets/placeholder10-400.webp 400w, assets/placeholder10-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Blue oval ceramic dish with carved deer silhouette and leaf pattern displayed on a neutral background" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder10-800.jpg" srcset="assets/placeholder10-400.jpg 400w, assets/placeholder10-800.jpg 800w"/ data-full="assets/placeholder10-800.jpg"></picture><picture><source srcset="assets/placeholder11-400.webp 400w, assets/placeholder11-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Small green ceramic dish shaped like a leaf with carved vein texture" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder11-800.jpg" srcset="assets/placeholder11-400.jpg 400w, assets/placeholder11-800.jpg 800w"/ data-full="assets/placeholder11-800.jpg"></picture><picture><source srcset="assets/placeholder12-400.webp 400w, assets/placeholder12-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Pair of scalloped ceramic plates in orange and yellow glazes with raised leaf pattern" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder12-800.jpg" srcset="assets/placeholder12-400.jpg 400w, assets/placeholder12-800.jpg 800w"/ data-full="assets/placeholder12-800.jpg"></picture><picture><source srcset="assets/placeholder13-400.webp 400w, assets/placeholder13-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Set of three heart-shaped ceramic trays with carved leaf pattern in rich red and purple glazes" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder13-800.jpg" srcset="assets/placeholder13-400.jpg 400w, assets/placeholder13-800.jpg 800w"/ data-full="assets/placeholder13-800.jpg"></picture><picture><source srcset="assets/placeholder14-400.webp 400w, assets/placeholder14-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Large round pink ceramic plate with carved flowers and butterflies displayed upright on a stand" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder14-800.jpg" srcset="assets/placeholder14-400.jpg 400w, assets/placeholder14-800.jpg 800w"/ data-full="assets/placeholder14-800.jpg"></picture><picture><source srcset="assets/placeholder15-400.webp 400w, assets/placeholder15-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Large round red ceramic platter with carved wave and leaf pattern presented on a display stand" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder15-800.jpg" srcset="assets/placeholder15-400.jpg 400w, assets/placeholder15-800.jpg 800w"/ data-full="assets/placeholder15-800.jpg"></picture><picture><source srcset="assets/placeholder16-400.webp 400w, assets/placeholder16-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Assortment of five small heart-shaped ceramic dishes in blue, pink, red and orange glazes arranged together" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder16-800.jpg" srcset="assets/placeholder16-400.jpg 400w, assets/placeholder16-800.jpg 800w"/ data-full="assets/placeholder16-800.jpg"></picture><picture><source srcset="assets/placeholder2-400.webp 400w, assets/placeholder2-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Group of five heart-shaped ceramic trays in red and blue leaf and solid glazes styled on a concrete surface" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder2-800.jpg" srcset="assets/placeholder2-400.jpg 400w, assets/placeholder2-800.jpg 800w"/ data-full="assets/placeholder2-800.jpg"></picture><picture><source srcset="assets/placeholder3-400.webp 400w, assets/placeholder3-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Three ornate-edge ceramic trays in soft pink, peach and gray floral patterns displayed beside a potted plant" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder3-800.jpg" srcset="assets/placeholder3-400.jpg 400w, assets/placeholder3-800.jpg 800w"/ data-full="assets/placeholder3-800.jpg"></picture><picture><source srcset="assets/placeholder4-400.webp 400w, assets/placeholder4-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Circle of small pink and burgundy heart-shaped ceramic trinket dishes arranged on wooden boards" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder4-800.jpg" srcset="assets/placeholder4-400.jpg 400w, assets/placeholder4-800.jpg 800w"/ data-full="assets/placeholder4-800.jpg"></picture><picture><source srcset="assets/placeholder5-400.webp 400w, assets/placeholder5-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Large round red ceramic platter with flower pattern" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder5-800.jpg" srcset="assets/placeholder5-400.jpg 400w, assets/placeholder5-800.jpg 800w"/ data-full="assets/placeholder5-800.jpg"></picture><picture><source srcset="assets/placeholder6-400.webp 400w, assets/placeholder6-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Large blue ceramic serving bowl with carved feather pattern styled with wooden salad servers" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder6-800.jpg" srcset="assets/placeholder6-400.jpg 400w, assets/placeholder6-800.jpg 800w"/ data-full="assets/placeholder6-800.jpg"></picture><picture><source srcset="assets/placeholder7-400.webp 400w, assets/placeholder7-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Pair of long oval ceramic serving platters in plum and blue-red glazes surrounded by dried grasses" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder7-800.jpg" srcset="assets/placeholder7-400.jpg 400w, assets/placeholder7-800.jpg 800w"/ data-full="assets/placeholder7-800.jpg"></picture><picture><source srcset="assets/placeholder8-400.webp 400w, assets/placeholder8-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Set of five bird-shaped ceramic dishes with lace texture in blue, green and pink glazes" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder8-800.jpg" srcset="assets/placeholder8-400.jpg 400w, assets/placeholder8-800.jpg 800w"/ data-full="assets/placeholder8-800.jpg"></picture><picture><source srcset="assets/placeholder9-400.webp 400w, assets/placeholder9-800.webp 800w" type="image/webp"/><img class="lightbox-trigger" alt="Large round brown ceramic platter with palm tree pattern presented on a display stand" decoding="async" loading="lazy" sizes="(max-width: 700px) 400px, 800px" src="assets/placeholder9-800.jpg" srcset="assets/placeholder9-400.jpg 400w, assets/placeholder9-800.jpg 800w"/ data-full="assets/placeholder9-800.jpg"></picture></div>
 </section>
 </main>
 <footer>
 <p>© 2025 Kiln Kissed Ceramics by Bhavya Kothari, Sunnyvale CA</p>
 </footer>
+
+<div class="lightbox-overlay" data-lightbox>
+  <div class="lightbox-content">
+    <button class="lightbox-close" type="button" aria-label="Close image">×</button>
+    <img class="lightbox-image" src="" alt="Expanded view" loading="lazy"/>
+  </div>
+</div>
+
+
+<script>
+  (function() {
+    var overlay = document.querySelector('[data-lightbox]');
+    if (!overlay) return;
+    var imgEl = overlay.querySelector('.lightbox-image');
+    var closeBtn = overlay.querySelector('.lightbox-close');
+
+    function openLightbox(src, alt) {
+      imgEl.src = src;
+      if (alt) imgEl.alt = alt;
+      overlay.classList.add('is-open');
+    }
+
+    function closeLightbox() {
+      overlay.classList.remove('is-open');
+      imgEl.src = '';
+    }
+
+    document.addEventListener('click', function(event) {
+      var trigger = event.target.closest('.lightbox-trigger');
+      if (!trigger) return;
+      event.preventDefault();
+      var fullSrc = trigger.getAttribute('data-full') || trigger.getAttribute('src');
+      var alt = trigger.getAttribute('alt') || 'Expanded view';
+      openLightbox(fullSrc, alt);
+    });
+
+    overlay.addEventListener('click', function(event) {
+      if (event.target === overlay) {
+        closeLightbox();
+      }
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeLightbox);
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' || event.key === 'Esc') {
+        if (overlay.classList.contains('is-open')) {
+          closeLightbox();
+        }
+      }
+    });
+  })();
+</script>
+
+<script>
+  (function() {
+    var toggle = document.querySelector('[data-nav-toggle]');
+    var overlay = document.querySelector('[data-nav-overlay]');
+    var closeBtn = document.querySelector('[data-nav-close]');
+    if (!toggle || !overlay) return;
+
+    function openNav() {
+      document.body.classList.add('nav-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeNav() {
+      document.body.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', function() {
+      if (document.body.classList.contains('nav-open')) {
+        closeNav();
+      } else {
+        openNav();
+      }
+    });
+
+    overlay.addEventListener('click', closeNav);
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeNav);
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' || event.key === 'Esc') {
+        if (document.body.classList.contains('nav-open')) {
+          closeNav();
+        }
+      }
+    });
+  })();
+</script>
 </body>
 </html>

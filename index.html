@@ -12,6 +12,224 @@
 <link rel="canonical" href="https://kilnkissedceramics.github.io/"/>
 
 <link href="style.css" rel="stylesheet"/>
+<style>
+  /* Index-only header logo sizing */
+  header img.logo {
+    max-width: 500px; /* base desktop size */
+    height: auto;
+  }
+
+  /* Mobile nav enhancements for index.html only */
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-overlay {
+    display: none;
+  }
+
+  .nav-close {
+    display: none;
+  }
+
+
+  @media (max-width: 768px) and (orientation: portrait) {
+    header {
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    header img.logo {
+      max-width: 275px; /* larger logo on portrait mobile */
+      height: auto;
+    }
+
+    /* Drawer-style nav on the right */
+    header .nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: 78%;
+      max-width: 320px;
+      background: #ffffff;
+      box-shadow: -4px 0 18px rgba(0, 0, 0, 0.16);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 3rem 1.5rem 2rem;
+      transform: translateX(100%);
+      transition: transform 0.25s ease, opacity 0.2s ease;
+      z-index: 1001;
+    }
+
+    header .nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav .cart-right {
+      position: static;
+      transform: none;
+      margin-top: 2rem;
+    }
+
+    .nav .cart-right a {
+      display: inline-block;
+      padding: 0.5rem 0;
+    }
+
+    .nav-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(26, 77, 180, 0.18);
+      background: #ffffff;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .nav-toggle:focus-visible {
+      outline: 2px solid rgba(26,77,180,0.35);
+      outline-offset: 2px;
+    }
+
+    .nav-toggle-bars {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-toggle-bar {
+      width: 18px;
+      height: 2px;
+      border-radius: 1px;
+      background: #1A4DB4;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(26,77,180,0.18);
+      background: #ffffff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      line-height: 1;
+      color: #1A4DB4;
+    }
+
+    .nav-close:focus-visible {
+      outline: 2px solid rgba(26,77,180,0.35);
+      outline-offset: 2px;
+    }
+
+    body.nav-open header .nav {
+      transform: translateX(0);
+    }
+
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 1000;
+    }
+
+    body.nav-open .nav-overlay {
+      opacity: 1;
+      pointer-events: auto;
+      display: block;
+    }
+
+    /* Slightly smaller type for Where to Buy section on portrait mobile */
+    .where-to-buy {
+      font-size: 0.95rem;
+    }
+    .where-to-buy h2 {
+      font-size: 1.3rem;
+    }
+    .where-to-buy h3 {
+      font-size: 1.05rem;
+    }
+  }
+  /* Simple lightbox overlay for index banner */
+  .lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+  }
+  .lightbox-overlay.is-open {
+    display: flex;
+  }
+  .lightbox-content {
+    max-width: 94vw;
+    max-height: 94vh;
+    padding: 0.75rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+    position: relative;
+  }
+  .lightbox-image {
+    display: block;
+    max-width: 100%;
+    max-height: 80vh;
+    height: auto;
+    width: auto;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: 1px solid rgba(26,77,180,0.18);
+    background: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: #1A4DB4;
+  }
+  .lightbox-close:focus-visible {
+    outline: 2px solid rgba(26,77,180,0.35);
+    outline-offset: 2px;
+  }
+
+</style>
+
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T34TFGC2Q1"></script>
@@ -25,8 +243,18 @@
 </head>
 <body>
 <header>
-<img alt="Kiln Kissed Ceramics by Bhavya Kothari" class="logo" src="assets/logo.jpg"/>
-<nav class="nav">
+<div class="header-bar">
+  <img alt="Kiln Kissed Ceramics by Bhavya Kothari" class="logo" src="assets/logo.jpg"/>
+  <button class="nav-toggle" type="button" data-nav-toggle aria-label="Open navigation" aria-expanded="false">
+    <span class="nav-toggle-bars">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </span>
+  </button>
+</div>
+<nav class="nav" aria-label="Main navigation">
+<button class="nav-close" type="button" data-nav-close aria-label="Close navigation">×</button>
 <ul>
 <li><a href="index.html">Home</a></li>
 <li><a href="gallery.html">Gallery</a></li>
@@ -37,6 +265,7 @@
 <div class="cart-right"><a aria-label="Go to Shop" href="shop.html">Cart</a></div>
 </nav>
 </header>
+<div class="nav-overlay" data-nav-overlay></div>
 <main>
 <section class="hero">
 <picture>
@@ -46,17 +275,7 @@
     assets/banner/banner-1200.webp 1200w,
     assets/banner/banner-1600.webp 1600w
   " sizes="100vw">
-  <img
-    src="assets/banner/banner-1200.jpg"
-    srcset="
-      assets/banner/banner-400.jpg 400w,
-      assets/banner/banner-800.jpg 800w,
-      assets/banner/banner-1200.jpg 1200w,
-      assets/banner/banner-1600.jpg 1600w
-    "
-    sizes="100vw"
-    alt="Kiln Kissed Ceramics by Bhavya Kothari Sunnyvale CA"
-    style="width:100%; height:auto;">
+  <img src="assets/banner/banner-1200.jpg" srcset=" assets/banner/banner-400.jpg 400w, assets/banner/banner-800.jpg 800w, assets/banner/banner-1200.jpg 1200w, assets/banner/banner-1600.jpg 1600w " sizes="100vw" alt="Kiln Kissed Ceramics by Bhavya Kothari Sunnyvale CA" style="width:100%; height:auto;">
 </picture>
 </section>
 <section class="intro">
@@ -80,10 +299,109 @@
 <br/>
 <h3>Brick + Mortar Locations</h3>
 <p>Currently selling at <a href="https://www.blossomhillcrafts.com/bhc-store.html#/" rel="noopener" target="_blank">Blossom Hill Crafts Store</a>.</p>
+<p><em>Where:</em> 354 East Campbell Avenue, Campbell, CA</p>
+<p><em>Details:</em> Pottery studio and ceramics store featuring classes, memberships, and work from local ceramic artists. Open 7am–11pm, 7 days a week.</p>
 </section>
 </main>
 <footer>
 <p>© 2025 Kiln Kissed Ceramics by Bhavya Kothari, Sunnyvale CA</p>
 </footer>
-</body>
+
+<script>
+  (function() {
+    var toggle = document.querySelector('[data-nav-toggle]');
+    var overlay = document.querySelector('[data-nav-overlay]');
+    var closeBtn = document.querySelector('[data-nav-close]');
+    if (!toggle || !overlay) return;
+
+    function openNav() {
+      document.body.classList.add('nav-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeNav() {
+      document.body.classList.remove('nav-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', function() {
+      if (document.body.classList.contains('nav-open')) {
+        closeNav();
+      } else {
+        openNav();
+      }
+    });
+
+    overlay.addEventListener('click', closeNav);
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeNav);
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' || event.key === 'Esc') {
+        if (document.body.classList.contains('nav-open')) {
+          closeNav();
+        }
+      }
+    });
+  })();
+</script>
+
+
+
+
+<div class="lightbox-overlay" data-lightbox>
+  <div class="lightbox-content">
+    <button class="lightbox-close" type="button" aria-label="Close image">×</button>
+    <img class="lightbox-image" src="" alt="Expanded view" loading="lazy"/>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var overlay = document.querySelector('[data-lightbox]');
+    if (!overlay) return;
+    var imgEl = overlay.querySelector('.lightbox-image');
+    var closeBtn = overlay.querySelector('.lightbox-close');
+
+    function openLightbox(src, alt) {
+      imgEl.src = src;
+      if (alt) imgEl.alt = alt;
+      overlay.classList.add('is-open');
+    }
+
+    function closeLightbox() {
+      overlay.classList.remove('is-open');
+      imgEl.src = '';
+    }
+
+    document.addEventListener('click', function(event) {
+      var trigger = event.target.closest('.lightbox-trigger');
+      if (!trigger) return;
+      event.preventDefault();
+      var fullSrc = trigger.getAttribute('data-full') || trigger.getAttribute('src');
+      var alt = trigger.getAttribute('alt') || 'Expanded view';
+      openLightbox(fullSrc, alt);
+    });
+
+    overlay.addEventListener('click', function(event) {
+      if (event.target === overlay) {
+        closeLightbox();
+      }
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeLightbox);
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' || event.key === 'Esc') {
+        if (overlay.classList.contains('is-open')) {
+          closeLightbox();
+        }
+      }
+    });
+  })();
+</script></body>
 </html>
