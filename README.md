@@ -107,7 +107,7 @@ If you spot a typo, broken link, or accessibility issue and would like to help:
 
 All copy, design, and images in this repo are for **Kiln Kissed Ceramics**.
 
-- © Bhavya Kothari. All rights reserved.
+- © Kiln Kissed Ceramics by Bhavya Kothari and Bhavya Kothari. All rights reserved.
 - Please **do not reuse photos or text** without explicit permission.
 
 If you’d like to feature or share Kiln Kissed Ceramics, please link to the public site rather than copying content directly.
