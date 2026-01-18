@@ -31,56 +31,73 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-size: 2rem;
       margin-bottom: 1.5rem;
     }
-  
+
     /* About page layout */
     .about-layout {
       display: flex;
+      gap: 1.5rem;
       align-items: flex-start;
-      gap: 24px;
     }
 
-    .about-photo-wrap {
+    .about-photo {
       flex: 0 0 240px;
-    }
-
-    picture.about-photo {
-      display: block;
       width: 240px;
       height: 240px;
       border-radius: 50%;
       overflow: hidden;
     }
 
-    .about-copy {
-      flex: 1 1 auto;
-      min-width: 0; /* prevents overflow */
-      text-align: left;
+    .about-photo picture,
+    .about-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
     }
 
-    .about-copy h2 {
-      margin-top: 0;
+    .about-photo img {
+      object-fit: cover;
     }
 
-    @media (max-width: 768px) {
+    .about-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .about-text h2 {
+      margin: 0;
+    }
+
+    .about-text p {
+      margin: 0;
+    }
+
+    /* Add subtle "blank line" spacing above and below the first paragraph */
+    .about-text p.about-intro {
+      margin-top: 0.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .about-text p + p {
+      margin-top: 0.75rem;
+    }
+
+    @media (max-width: 768px) and (orientation: portrait) {
       .about-layout {
         flex-direction: column;
         align-items: center;
       }
 
-      .about-photo-wrap {
-        flex: 0 0 auto;
+      .about-photo {
+        width: 220px;
+        height: 220px;
+        flex-basis: 220px;
       }
 
-      .about-copy {
+      .about-text {
         width: 100%;
-        text-align: left;
-      }
-
-      .about-copy h2 {
-        text-align: center;
       }
     }
-</style>
+  </style>
 
 <style>
   /* Shared header logo sizing + mobile nav (portrait only) */
@@ -274,36 +291,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="card" style="border: 1px solid rgba(26,77,180,0.12); border-radius: 14px; padding: 1.5rem; box-shadow: 0 6px 18px rgba(26,77,180,0.06);">
 <div class="prose" style="line-height:1.65;">
             <div class="about-layout">
-  <div class="about-photo-wrap">
-    <picture class="about-photo">
-  <source
-    type="image/webp"
-    srcset="
-      assets/artist/artist-400.webp 400w,
-      assets/artist/artist-800.webp 800w,
-      assets/artist/artist-1200.webp 1200w,
-      assets/artist/artist-1600.webp 1600w
-    "
-    sizes="240px">
-  <img
-    src="assets/artist/artist-800.jpg"
-    srcset="
-      assets/artist/artist-400.jpg 400w,
-      assets/artist/artist-800.jpg 800w,
-      assets/artist/artist-1200.jpg 1200w,
-      assets/artist/artist-1600.jpg 1600w
-    "
-    sizes="240px"
-    alt="Artist portrait"
-    style="display:block; width: 100%; height: 100%; object-fit: cover;">
-</picture>
-  </div>
-  <div class="about-copy">
-    <h2>Hi, I'm Bhavya</h2>
-            <p>The ceramic artist behind Kiln Kissed Ceramics, based in Sunnyvale, CA. I create small-batch, handmade pottery that blends function with beauty. My work is rooted in a love of vibrant glazes, rich textures, and organic details that give each piece its own unique character.</p>
-            <p>My pieces begin with a slab of soft clay. I press everyday materials, like lace, leaves, bubble wrap, carved wooden blocks, or embroidered fabrics into the clay’s surface, creating texture and pattern. From there, each slab is cut and hand-molded into a range of functional forms. My process is intentionally slow and intuitive, guided by play, design, and experimentation. This hands-on approach ensures every piece develops its own distinct personality, with natural variations that make it truly one of a kind.</p>
-  </div>
-</div>
+              <div class="about-photo">
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset="
+                      assets/artist/artist-400.webp 400w,
+                      assets/artist/artist-800.webp 800w,
+                      assets/artist/artist-1200.webp 1200w,
+                      assets/artist/artist-1600.webp 1600w
+                    "
+                    sizes="240px">
+                  <img
+                    src="assets/artist/artist-800.jpg"
+                    srcset="
+                      assets/artist/artist-400.jpg 400w,
+                      assets/artist/artist-800.jpg 800w,
+                      assets/artist/artist-1200.jpg 1200w,
+                      assets/artist/artist-1600.jpg 1600w
+                    "
+                    sizes="240px"
+                    alt="Artist portrait">
+                </picture>
+              </div>
+
+              <div class="about-text">
+                <h2>Hi, I'm Bhavya</h2>
+                <p class="about-intro">The ceramic artist behind Kiln Kissed Ceramics, based in Sunnyvale, CA. I create small-batch, handmade pottery that blends function with beauty. My work is rooted in a love of vibrant glazes, rich textures, and organic details that give each piece its own unique character.</p>
+                <p>My pieces begin with a slab of soft clay. I press everyday materials, like lace, leaves, bubble wrap, carved wooden blocks, or embroidered fabrics into the clay’s surface, creating texture and pattern. From there, each slab is cut and hand-molded into a range of functional forms. My process is intentionally slow and intuitive, guided by play, design, and experimentation. This hands-on approach ensures every piece develops its own distinct personality, with natural variations that make it truly one of a kind.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
