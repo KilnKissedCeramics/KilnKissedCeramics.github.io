@@ -1,377 +1,477 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-T9SPZ52L');</script>
-<!-- End Google Tag Manager -->
+  <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-T9SPZ52L");
+    </script>
+    <!-- End Google Tag Manager -->
 
-  <meta charset="UTF-8">
-  <!-- Favicons -->
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16.png">
-<link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon/favicon-48.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon/favicon-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon/favicon-16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="/assets/favicon/favicon-48.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/favicon/apple-touch-icon.png"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>About | Kiln Kissed Ceramics</title>
+    <title>About | Kiln Kissed Ceramics</title>
 
-  <meta name="description" content="I'm Bhavya, the ceramic artist behind Kiln Kissed Ceramics, based in Sunnyvale, CA. I create small-batch, handmade pottery that blends function with beauty."/>
-  <meta name="robots" content="index,follow"/>
-  <link rel="canonical" href="https://kilnkissedceramics.github.io/about.html"/>
+    <meta
+      name="description"
+      content="I'm Bhavya, the ceramic artist behind Kiln Kissed Ceramics, based in Sunnyvale, CA. I create small-batch, handmade pottery that blends function with beauty."
+    />
+    <meta name="robots" content="index,follow" />
+    <link
+      rel="canonical"
+      href="https://kilnkissedceramics.github.io/about.html"
+    />
 
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .about-centered {
-      max-width: 800px;
-      margin: 3rem auto;
-      text-align: center;
-      font-size: 1.15rem;
-      line-height: 1.8;
-    }
-    .about-centered h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-    }
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .about-centered {
+        max-width: 800px;
+        margin: 3rem auto;
+        text-align: center;
+        font-size: 1.15rem;
+        line-height: 1.8;
+      }
+      .about-centered h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
 
-    /* About page layout */
-    .about-layout {
-      display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
-    }
-
-    .about-photo {
-      flex: 0 0 240px;
-      width: 240px;
-      height: 240px;
-      border-radius: 50%;
-      overflow: hidden;
-    }
-
-    .about-photo picture,
-    .about-photo img {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-
-    .about-photo img {
-      object-fit: cover;
-    }
-
-    .about-text {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .about-text h2 {
-      margin: 0;
-    }
-
-    .about-text p {
-      margin: 0;
-    }
-
-    /* Add subtle "blank line" spacing above and below the first paragraph */
-    .about-text p.about-intro {
-      margin-top: 0.25rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .about-text p + p {
-      margin-top: 0.75rem;
-    }
-
-    @media (max-width: 768px) and (orientation: portrait) {
+      /* About page layout */
       .about-layout {
-        flex-direction: column;
-        align-items: center;
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
       }
 
       .about-photo {
-        width: 220px;
-        height: 220px;
-        flex-basis: 220px;
+        flex: 0 0 240px;
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+
+      .about-photo picture,
+      .about-photo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .about-photo img {
+        object-fit: cover;
       }
 
       .about-text {
-        width: 100%;
+        flex: 1;
+        min-width: 0;
       }
-    }
-  </style>
 
-<style>
-  /* Shared header logo sizing + mobile nav (portrait only) */
-  header img.logo {
-    max-width: 500px; /* base desktop size */
-    height: auto;
-  }
+      .about-text h2 {
+        margin: 0;
+      }
 
-  .nav-toggle {
-    display: none;
-  }
+      .about-text p {
+        margin: 0;
+      }
 
-  .nav-overlay {
-    display: none;
-  }
+      /* Add subtle "blank line" spacing above and below the first paragraph */
+      .about-text p.about-intro {
+        margin-top: 0.25rem;
+        margin-bottom: 0.75rem;
+      }
 
-  .nav-close {
-    display: none;
-  }
+      .about-text p + p {
+        margin-top: 0.75rem;
+      }
 
-  @media (max-width: 768px) and (orientation: portrait) {
-    header {
-      padding: 0.75rem 1rem;
-      text-align: left;
-    }
+      @media (max-width: 768px) and (orientation: portrait) {
+        .about-layout {
+          flex-direction: column;
+          align-items: center;
+        }
 
-    .header-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
+        .about-photo {
+          width: 220px;
+          height: 220px;
+          flex-basis: 220px;
+        }
 
-    header img.logo {
-      max-width: 275px;
-      height: auto;
-    }
+        .about-text {
+          width: 100%;
+        }
+      }
+    </style>
 
-    /* Drawer-style nav on the right */
-    header .nav {
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100vh;
-      width: 78%;
-      max-width: 320px;
-      background: #ffffff;
-      box-shadow: -4px 0 18px rgba(0, 0, 0, 0.16);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      padding: 3rem 1.5rem 2rem;
-      transform: translateX(100%);
-      transition: transform 0.25s ease, opacity 0.2s ease;
-      z-index: 1001;
-    }
+    <style>
+      /* Shared header logo sizing + mobile nav (portrait only) */
+      header img.logo {
+        max-width: 500px; /* base desktop size */
+        height: auto;
+      }
 
-    header .nav ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      padding: 0;
-      margin: 0;
-    }
+      .nav-toggle {
+        display: none;
+      }
 
-    .nav .cart-right {
-      position: static;
-      transform: none;
-      margin-top: 2rem;
-    }
+      .nav-overlay {
+        display: none;
+      }
 
-    .nav .cart-right a {
-      display: inline-block;
-      padding: 0.5rem 0;
-    }
+      .nav-close {
+        display: none;
+      }
 
-    .nav-toggle {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 999px;
-      border: 1px solid rgba(26, 77, 180, 0.18);
-      background: #ffffff;
-      cursor: pointer;
-      padding: 0;
-    }
+      @media (max-width: 768px) and (orientation: portrait) {
+        header {
+          padding: 0.75rem 1rem;
+          text-align: left;
+        }
 
-    .nav-toggle:focus-visible {
-      outline: 2px solid rgba(26,77,180,0.35);
-      outline-offset: 2px;
-    }
+        .header-bar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+        }
 
-    .nav-toggle-bars {
-      display: inline-flex;
-      flex-direction: column;
-      gap: 4px;
-    }
+        header img.logo {
+          max-width: 275px;
+          height: auto;
+        }
 
-    .nav-toggle-bar {
-      width: 18px;
-      height: 2px;
-      border-radius: 1px;
-      background: #1A4DB4;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
+        /* Drawer-style nav on the right */
+        header .nav {
+          position: fixed;
+          top: 0;
+          right: 0;
+          height: 100vh;
+          width: 78%;
+          max-width: 320px;
+          background: #ffffff;
+          box-shadow: -4px 0 18px rgba(0, 0, 0, 0.16);
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          padding: 3rem 1.5rem 2rem;
+          transform: translateX(100%);
+          transition:
+            transform 0.25s ease,
+            opacity 0.2s ease;
+          z-index: 1001;
+        }
 
-    .nav-close {
-      position: absolute;
-      top: 1.25rem;
-      right: 1.25rem;
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 1px solid rgba(26,77,180,0.18);
-      background: #ffffff;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      line-height: 1;
-      color: #1A4DB4;
-    }
+        header .nav ul {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          padding: 0;
+          margin: 0;
+        }
 
-    .nav-close:focus-visible {
-      outline: 2px solid rgba(26,77,180,0.35);
-      outline-offset: 2px;
-    }
+        .nav .cart-right {
+          position: static;
+          transform: none;
+          margin-top: 2rem;
+        }
 
-    body.nav-open header .nav {
-      transform: translateX(0);
-    }
+        .nav .cart-right a {
+          display: inline-block;
+          padding: 0.5rem 0;
+        }
 
-    .nav-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.35);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-      z-index: 1000;
-    }
+        .nav-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          border-radius: 999px;
+          border: 1px solid rgba(26, 77, 180, 0.18);
+          background: #ffffff;
+          cursor: pointer;
+          padding: 0;
+        }
 
-    body.nav-open .nav-overlay {
-      opacity: 1;
-      pointer-events: auto;
-      display: block;
-    }
-  }
-</style>
+        .nav-toggle:focus-visible {
+          outline: 2px solid rgba(26, 77, 180, 0.35);
+          outline-offset: 2px;
+        }
 
-<!-- Social sharing (Open Graph / Twitter) -->
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Kiln Kissed Ceramics">
-<meta property="og:url" content="https://kilnkissedceramics.github.io/about.html">
-<meta property="og:title" content="About | Kiln Kissed Ceramics">
-<meta property="og:description" content="Meet Bhavya, the maker behind Kiln Kissed Ceramics—small-batch pottery made in Sunnyvale, CA for everyday use and gifting.">
-<meta property="og:image" content="https://kilnkissedceramics.github.io/assets/banner/banner-og-1200x630.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Handmade ceramics with glossy, colorful glaze by Kiln Kissed Ceramics">
+        .nav-toggle-bars {
+          display: inline-flex;
+          flex-direction: column;
+          gap: 4px;
+        }
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="About | Kiln Kissed Ceramics">
-<meta name="twitter:description" content="Meet Bhavya, the maker behind Kiln Kissed Ceramics—small-batch pottery made in Sunnyvale, CA for everyday use and gifting.">
-<meta name="twitter:image" content="https://kilnkissedceramics.github.io/assets/banner/banner-og-1200x630.jpg">
+        .nav-toggle-bar {
+          width: 18px;
+          height: 2px;
+          border-radius: 1px;
+          background: #1a4db4;
+          transition:
+            transform 0.2s ease,
+            opacity 0.2s ease;
+        }
+
+        .nav-close {
+          position: absolute;
+          top: 1.25rem;
+          right: 1.25rem;
+          width: 32px;
+          height: 32px;
+          border-radius: 999px;
+          border: 1px solid rgba(26, 77, 180, 0.18);
+          background: #ffffff;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.1rem;
+          line-height: 1;
+          color: #1a4db4;
+        }
+
+        .nav-close:focus-visible {
+          outline: 2px solid rgba(26, 77, 180, 0.35);
+          outline-offset: 2px;
+        }
+
+        body.nav-open header .nav {
+          transform: translateX(0);
+        }
+
+        .nav-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.35);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.2s ease;
+          z-index: 1000;
+        }
+
+        body.nav-open .nav-overlay {
+          opacity: 1;
+          pointer-events: auto;
+          display: block;
+        }
+      }
+    </style>
+
+    <!-- Social sharing (Open Graph / Twitter) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kiln Kissed Ceramics" />
+    <meta
+      property="og:url"
+      content="https://kilnkissedceramics.github.io/about.html"
+    />
+    <meta property="og:title" content="About | Kiln Kissed Ceramics" />
+    <meta
+      property="og:description"
+      content="Meet Bhavya, the maker behind Kiln Kissed Ceramics—small-batch pottery made in Sunnyvale, CA for everyday use and gifting."
+    />
+    <meta
+      property="og:image"
+      content="https://kilnkissedceramics.github.io/assets/banner/banner-og-1200x630.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Handmade ceramics with glossy, colorful glaze by Kiln Kissed Ceramics"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="About | Kiln Kissed Ceramics" />
+    <meta
+      name="twitter:description"
+      content="Meet Bhavya, the maker behind Kiln Kissed Ceramics—small-batch pottery made in Sunnyvale, CA for everyday use and gifting."
+    />
+    <meta
+      name="twitter:image"
+      content="https://kilnkissedceramics.github.io/assets/banner/banner-og-1200x630.jpg"
+    />
 
     <!-- Structured data: LocalBusiness -->
     <script type="application/ld+json">
-    {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://kilnkissedceramics.github.io/#localbusiness",
-  "name": "Kiln Kissed Ceramics",
-  "url": "https://kilnkissedceramics.github.io/",
-  "description": "Small-batch, handmade ceramics made in Sunnyvale, CA—bowls, plates, platters, and trinket dishes for everyday use and thoughtful gifting across the South Bay and Silicon Valley.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Sunnyvale",
-    "addressRegion": "CA",
-    "addressCountry": "US"
-  },
-  "areaServed": [
-    "South Bay",
-    "Silicon Valley",
-    "San Francisco Bay Area"
-  ],
-  "sameAs": [
-    "https://www.instagram.com/kiln.kissed.ceramics"
-  ],
-  "logo": "https://kilnkissedceramics.github.io/assets/favicon/kiln-kissed-square-1024.png",
-  "image": [
-    "https://kilnkissedceramics.github.io/assets/banner/banner-og-1200x630.jpg",
-    "https://kilnkissedceramics.github.io/assets/favicon/kiln-kissed-square-1024.png"
-  ]
-}
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://kilnkissedceramics.github.io/#localbusiness",
+        "name": "Kiln Kissed Ceramics",
+        "url": "https://kilnkissedceramics.github.io/",
+        "description": "Small-batch, handmade ceramics made in Sunnyvale, CA—bowls, plates, platters, and trinket dishes for everyday use and thoughtful gifting across the South Bay and Silicon Valley.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Sunnyvale",
+          "addressRegion": "CA",
+          "addressCountry": "US"
+        },
+        "areaServed": ["South Bay", "Silicon Valley", "San Francisco Bay Area"],
+        "sameAs": ["https://www.instagram.com/kiln.kissed.ceramics"],
+        "logo": "https://kilnkissedceramics.github.io/assets/favicon/kiln-kissed-square-1024.png",
+        "image": [
+          "https://kilnkissedceramics.github.io/assets/banner/banner-og-1200x630.jpg",
+          "https://kilnkissedceramics.github.io/assets/favicon/kiln-kissed-square-1024.png"
+        ]
+      }
     </script>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-T9SPZ52L"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-</head>
-<body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9SPZ52L"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+    <header>
+      <div class="header-bar">
+        <img
+          alt="Kiln Kissed Ceramics by Bhavya Kothari"
+          class="logo"
+          src="assets/logo.jpg"
+        />
+        <button
+          class="nav-toggle"
+          type="button"
+          data-nav-toggle
+          aria-label="Open navigation"
+          aria-expanded="false"
+        >
+          <span class="nav-toggle-bars">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+          </span>
+        </button>
+      </div>
+      <nav class="nav" aria-label="Main navigation">
+        <button
+          class="nav-close"
+          type="button"
+          data-nav-close
+          aria-label="Close navigation"
+        >
+          ×
+        </button>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="cart-right">
+          <a aria-label="Go to Shop" href="shop.html">Cart</a>
+        </div>
+      </nav>
+    </header>
+    <div class="nav-overlay" data-nav-overlay></div>
 
-
-  <header>
-<div class="header-bar">
-  <img alt="Kiln Kissed Ceramics by Bhavya Kothari" class="logo" src="assets/logo.jpg"/>
-  <button class="nav-toggle" type="button" data-nav-toggle aria-label="Open navigation" aria-expanded="false">
-    <span class="nav-toggle-bars">
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-    </span>
-  </button>
-</div>
-<nav class="nav" aria-label="Main navigation">
-<button class="nav-close" type="button" data-nav-close aria-label="Close navigation">×</button>
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="gallery.html">Gallery</a></li>
-<li><a href="shop.html">Shop</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul>
-<div class="cart-right"><a aria-label="Go to Shop" href="shop.html">Cart</a></div>
-</nav>
-</header>
-<div class="nav-overlay" data-nav-overlay></div>
-
-  <main>
-      <section class="container" style="max-width: 900px; margin: 0 auto; padding: 2rem 1rem;">
-        <div class="card" style="border: 1px solid rgba(26,77,180,0.12); border-radius: 14px; padding: 1.5rem; box-shadow: 0 6px 18px rgba(26,77,180,0.06);">
-<div class="prose" style="line-height:1.65;">
+    <main>
+      <section
+        class="container"
+        style="max-width: 900px; margin: 0 auto; padding: 2rem 1rem"
+      >
+        <div
+          class="card"
+          style="
+            border: 1px solid rgba(26, 77, 180, 0.12);
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 6px 18px rgba(26, 77, 180, 0.06);
+          "
+        >
+          <div class="prose" style="line-height: 1.65">
             <div class="about-layout">
               <div class="about-photo">
                 <picture>
                   <source
                     type="image/webp"
                     srcset="
-                      assets/artist/artist-400.webp 400w,
-                      assets/artist/artist-800.webp 800w,
+                      assets/artist/artist-400.webp   400w,
+                      assets/artist/artist-800.webp   800w,
                       assets/artist/artist-1200.webp 1200w,
                       assets/artist/artist-1600.webp 1600w
                     "
-                    sizes="240px">
+                    sizes="240px"
+                  />
                   <img
                     src="assets/artist/artist-800.jpg"
                     srcset="
-                      assets/artist/artist-400.jpg 400w,
-                      assets/artist/artist-800.jpg 800w,
+                      assets/artist/artist-400.jpg   400w,
+                      assets/artist/artist-800.jpg   800w,
                       assets/artist/artist-1200.jpg 1200w,
                       assets/artist/artist-1600.jpg 1600w
                     "
                     sizes="240px"
-                    alt="Artist portrait">
+                    alt="Artist portrait"
+                  />
                 </picture>
               </div>
 
               <div class="about-text">
                 <h2>Hi, I'm Bhavya</h2>
-                <p class="about-intro">The ceramic artist behind Kiln Kissed Ceramics, based in Sunnyvale, CA. I create small-batch, handmade pottery that blends function with beauty. My work is rooted in a love of vibrant glazes, rich textures, and organic details that give each piece its own unique character.</p>
-                <p>My pieces begin with a slab of soft clay. I press everyday materials, like lace, leaves, bubble wrap, carved wooden blocks, or embroidered fabrics into the clay’s surface, creating texture and pattern. From there, each slab is cut and hand-molded into a range of functional forms. My process is intentionally slow and intuitive, guided by play, design, and experimentation. This hands-on approach ensures every piece develops its own distinct personality, with natural variations that make it truly one of a kind.</p>
+                <p class="about-intro">
+                  The ceramic artist behind Kiln Kissed Ceramics, based in
+                  Sunnyvale, CA. I create small-batch, handmade pottery that
+                  blends function with beauty. My work is rooted in a love of
+                  vibrant glazes, rich textures, and organic details that give
+                  each piece its own unique character.
+                </p>
+                <p>
+                  My pieces begin with a slab of soft clay. I press everyday
+                  materials, like lace, leaves, bubble wrap, carved wooden
+                  blocks, or embroidered fabrics into the clay’s surface,
+                  creating texture and pattern. From there, each slab is cut and
+                  hand-molded into a range of functional forms. My process is
+                  intentionally slow and intuitive, guided by play, design, and
+                  experimentation. This hands-on approach ensures every piece
+                  develops its own distinct personality, with natural variations
+                  that make it truly one of a kind.
+                </p>
               </div>
             </div>
           </div>
@@ -379,49 +479,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </section>
     </main>
 
-  <footer>
-    <p>&copy; 2025-26 Kiln Kissed Ceramics by Bhavya Kothari, Sunnyvale CA</p>
-  </footer>
+    <footer>
+      <p>&copy; 2025-26 Kiln Kissed Ceramics by Bhavya Kothari, Sunnyvale CA</p>
+    </footer>
 
-<script>
-  (function() {
-    var toggle = document.querySelector('[data-nav-toggle]');
-    var overlay = document.querySelector('[data-nav-overlay]');
-    var closeBtn = document.querySelector('[data-nav-close]');
-    if (!toggle || !overlay) return;
+    <script>
+      (function () {
+        var toggle = document.querySelector("[data-nav-toggle]");
+        var overlay = document.querySelector("[data-nav-overlay]");
+        var closeBtn = document.querySelector("[data-nav-close]");
+        if (!toggle || !overlay) return;
 
-    function openNav() {
-      document.body.classList.add('nav-open');
-      toggle.setAttribute('aria-expanded', 'true');
-    }
-
-    function closeNav() {
-      document.body.classList.remove('nav-open');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-
-    toggle.addEventListener('click', function() {
-      if (document.body.classList.contains('nav-open')) {
-        closeNav();
-      } else {
-        openNav();
-      }
-    });
-
-    overlay.addEventListener('click', closeNav);
-
-    if (closeBtn) {
-      closeBtn.addEventListener('click', closeNav);
-    }
-
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape' || event.key === 'Esc') {
-        if (document.body.classList.contains('nav-open')) {
-          closeNav();
+        function openNav() {
+          document.body.classList.add("nav-open");
+          toggle.setAttribute("aria-expanded", "true");
         }
-      }
-    });
-  })();
-</script>
-</body>
+
+        function closeNav() {
+          document.body.classList.remove("nav-open");
+          toggle.setAttribute("aria-expanded", "false");
+        }
+
+        toggle.addEventListener("click", function () {
+          if (document.body.classList.contains("nav-open")) {
+            closeNav();
+          } else {
+            openNav();
+          }
+        });
+
+        overlay.addEventListener("click", closeNav);
+
+        if (closeBtn) {
+          closeBtn.addEventListener("click", closeNav);
+        }
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" || event.key === "Esc") {
+            if (document.body.classList.contains("nav-open")) {
+              closeNav();
+            }
+          }
+        });
+      })();
+    </script>
+  </body>
 </html>
