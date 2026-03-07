@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kilnkissedceramics.github.io/sitemap.xml
-Sitemap: https://kilnkissedceramics.github.io/sitemap.txt
+Sitemap: https://www.kilnkissedceramics.com/sitemap.xml
+Sitemap: https://www.kilnkissedceramics.com/sitemap.txt

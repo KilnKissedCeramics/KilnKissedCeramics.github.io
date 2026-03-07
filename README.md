@@ -3,7 +3,7 @@
 This repository contains the public website for **Kiln Kissed Ceramics by Bhavya Kothari** — a small-batch, handmade ceramics studio based in Sunnyvale, CA. The site is a simple, static site built with HTML and CSS, and is deployed via GitHub Pages.
 
 You can visit the live site here:  
-https://kilnkissedceramics.github.io
+https://www.kilnkissedceramics.com
 
 ---
 
