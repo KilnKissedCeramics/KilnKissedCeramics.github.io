@@ -1,447 +1,99 @@
-<!doctype html>
+---
+layout: default
+title: Contact | Kiln Kissed Ceramics
+description: Contact Bhavya at Kiln Kissed Ceramics with questions, commission ideas, or availability inquiries. Use the simple contact form to reach her.
+canonical_url: https://www.kilnkissedceramics.com/contact.html
+og_title: Contact | Kiln Kissed Ceramics
+og_description: Get in touch with Kiln Kissed Ceramics in Sunnyvale, CA. Send a note or follow along on Instagram for new drops and events.
+og_image: https://www.kilnkissedceramics.com/assets/banner/banner-og-1200x630.jpg
+og_image_alt: Handmade ceramics with glossy, colorful glaze by Kiln Kissed Ceramics
+schema: localbusiness
+---
 
-<html lang="en">
-  <head>
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-T9SPZ52L");
-    </script>
-    <!-- End Google Tag Manager -->
+<section>
+  <div class="contact-intro">
+    <h2>Contact Us</h2>
+    <strong>I’d love to hear from you!</strong>
+    <p>
+      For any questions about your order, custom requests, or details about my
+      ceramics, please reach out:
+    </p>
 
-    <!-- Favicons -->
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/assets/favicon/favicon-32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/assets/favicon/favicon-16.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="48x48"
-      href="/assets/favicon/favicon-48.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/assets/favicon/apple-touch-icon.png"
-    />
+    <p style="padding-left: 1em">
+      Instagram:
+      <a
+        href="https://www.instagram.com/kiln.kissed.ceramics"
+        rel="noopener"
+        target="_blank"
+        >@kiln.kissed.ceramics</a
+      >
+    </p>
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <p style="padding-left: 1em">
+      Email:
+      <a href="mailto:kiln.kissed.ceramics@gmail.com"
+        >kiln.kissed.ceramics@gmail.com</a
+      >
+    </p>
 
-    <title>Contact | Kiln Kissed Ceramics</title>
+    <p>I’ll get back to you as soon as I can!</p>
+  </div>
 
-    <meta
-      name="description"
-      content="Contact Bhavya at Kiln Kissed Ceramics with questions, commission ideas, or availability inquiries. Use the simple contact form to reach her."
-    />
-    <meta name="robots" content="index,follow" />
-    <link
-      rel="canonical"
-      href="https://www.kilnkissedceramics.com/contact.html"
+  <form
+    class="contact-form"
+    method="POST"
+    action="https://formspree.io/f/xrbozlob"
+  >
+    <label for="name">Name</label>
+    <input id="name" name="name" placeholder="Your name" type="text" />
+
+    <label for="email">Email</label>
+    <input
+      id="email"
+      name="email"
+      placeholder="you@example.com"
+      type="email"
     />
 
-    <link href="style.css" rel="stylesheet" />
+    <label for="message">Message</label>
+    <textarea
+      id="message"
+      name="message"
+      placeholder="Write your message here"
+      rows="5"
+    ></textarea>
 
-    <style>
-      /* Shared header logo sizing + mobile nav (portrait only) */
-      header img.logo {
-        max-width: 500px; /* base desktop size */
-        height: auto;
-      }
+    <button type="submit">Send Message</button>
+  </form>
 
-      .nav-toggle {
-        display: none;
-      }
+  <p style="text-align: center; margin-top: 1rem"></p>
+</section>
 
-      .nav-overlay {
-        display: none;
-      }
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var form = document.querySelector(".contact-form");
+    if (!form) return;
 
-      .nav-close {
-        display: none;
-      }
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
 
-      @media (max-width: 768px) and (orientation: portrait) {
-        header {
-          padding: 0.75rem 1rem;
-          text-align: left;
-        }
+      var data = new FormData(form);
 
-        .header-bar {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 1rem;
-        }
-
-        header img.logo {
-          max-width: 275px;
-          height: auto;
-        }
-
-        /* Drawer-style nav on the right */
-        header .nav {
-          position: fixed;
-          top: 0;
-          right: 0;
-          height: 100vh;
-          width: 78%;
-          max-width: 320px;
-          background: #ffffff;
-          box-shadow: -4px 0 18px rgba(0, 0, 0, 0.16);
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          justify-content: flex-start;
-          padding: 3rem 1.5rem 2rem;
-          transform: translateX(100%);
-          transition:
-            transform 0.25s ease,
-            opacity 0.2s ease;
-          z-index: 1001;
-        }
-
-        header .nav ul {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-          padding: 0;
-          margin: 0;
-        }
-
-        .nav .cart-right {
-          position: static;
-          transform: none;
-          margin-top: 2rem;
-        }
-
-        .nav .cart-right a {
-          display: inline-block;
-          padding: 0.5rem 0;
-        }
-
-        .nav-toggle {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 40px;
-          height: 40px;
-          border-radius: 999px;
-          border: 1px solid rgba(26, 77, 180, 0.18);
-          background: #ffffff;
-          cursor: pointer;
-          padding: 0;
-        }
-
-        .nav-toggle:focus-visible {
-          outline: 2px solid rgba(26, 77, 180, 0.35);
-          outline-offset: 2px;
-        }
-
-        .nav-toggle-bars {
-          display: inline-flex;
-          flex-direction: column;
-          gap: 4px;
-        }
-
-        .nav-toggle-bar {
-          width: 18px;
-          height: 2px;
-          border-radius: 1px;
-          background: #1a4db4;
-          transition:
-            transform 0.2s ease,
-            opacity 0.2s ease;
-        }
-
-        .nav-close {
-          position: absolute;
-          top: 1.25rem;
-          right: 1.25rem;
-          width: 32px;
-          height: 32px;
-          border-radius: 999px;
-          border: 1px solid rgba(26, 77, 180, 0.18);
-          background: #ffffff;
-          cursor: pointer;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.1rem;
-          line-height: 1;
-          color: #1a4db4;
-        }
-
-        .nav-close:focus-visible {
-          outline: 2px solid rgba(26, 77, 180, 0.35);
-          outline-offset: 2px;
-        }
-
-        body.nav-open header .nav {
-          transform: translateX(0);
-        }
-
-        .nav-overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(0, 0, 0, 0.35);
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity 0.2s ease;
-          z-index: 1000;
-        }
-
-        body.nav-open .nav-overlay {
-          opacity: 1;
-          pointer-events: auto;
-          display: block;
-        }
-      }
-    </style>
-
-    <!-- Social sharing (Open Graph / Twitter) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Kiln Kissed Ceramics" />
-    <meta
-      property="og:url"
-      content="https://www.kilnkissedceramics.com/contact.html"
-    />
-    <meta property="og:title" content="Contact | Kiln Kissed Ceramics" />
-    <meta
-      property="og:description"
-      content="Get in touch with Kiln Kissed Ceramics in Sunnyvale, CA. Send a note or follow along on Instagram for new drops and events."
-    />
-    <meta
-      property="og:image"
-      content="https://www.kilnkissedceramics.com/assets/banner/banner-og-1200x630.jpg"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta
-      property="og:image:alt"
-      content="Handmade ceramics with glossy, colorful glaze by Kiln Kissed Ceramics"
-    />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Contact | Kiln Kissed Ceramics" />
-    <meta
-      name="twitter:description"
-      content="Get in touch with Kiln Kissed Ceramics in Sunnyvale, CA. Send a note or follow along on Instagram for new drops and events."
-    />
-    <meta
-      name="twitter:image"
-      content="https://www.kilnkissedceramics.com/assets/banner/banner-og-1200x630.jpg"
-    />
-
-    <!-- Structured data: LocalBusiness -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "@id": "https://www.kilnkissedceramics.com/#localbusiness",
-        "name": "Kiln Kissed Ceramics",
-        "url": "https://www.kilnkissedceramics.com/",
-        "description": "Small-batch, handmade ceramics made in Sunnyvale, CA—bowls, plates, platters, and trinket dishes for everyday use and thoughtful gifting across the South Bay and Silicon Valley.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Sunnyvale",
-          "addressRegion": "CA",
-          "addressCountry": "US"
-        },
-        "areaServed": ["South Bay", "Silicon Valley", "San Francisco Bay Area"],
-        "sameAs": ["https://www.instagram.com/kiln.kissed.ceramics"],
-        "logo": "https://www.kilnkissedceramics.com/assets/favicon/kiln-kissed-square-1024.png",
-        "image": [
-          "https://www.kilnkissedceramics.com/assets/banner/banner-og-1200x630.jpg",
-          "https://www.kilnkissedceramics.com/assets/favicon/kiln-kissed-square-1024.png"
-        ]
-      }
-    </script>
-  </head>
-  <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-T9SPZ52L"
-        height="0"
-        width="0"
-        style="display: none; visibility: hidden"
-      ></iframe
-    ></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <header>
-      <div class="header-bar">
-        <img
-          alt="Kiln Kissed Ceramics by Bhavya Kothari"
-          class="logo"
-          src="assets/logo.jpg"
-        />
-        <button
-          class="nav-toggle"
-          type="button"
-          data-nav-toggle
-          aria-label="Open navigation"
-          aria-expanded="false"
-        >
-          <span class="nav-toggle-bars">
-            <span class="nav-toggle-bar"></span>
-            <span class="nav-toggle-bar"></span>
-            <span class="nav-toggle-bar"></span>
-          </span>
-        </button>
-      </div>
-      <nav class="nav" aria-label="Main navigation">
-        <button
-          class="nav-close"
-          type="button"
-          data-nav-close
-          aria-label="Close navigation"
-        >
-          ×
-        </button>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <div class="cart-right">
-          <a aria-label="Go to Shop" href="shop.html">Cart</a>
-        </div>
-      </nav>
-    </header>
-    <div class="nav-overlay" data-nav-overlay></div>
-    <main>
-      <section>
-        <div class="contact-intro">
-          <h2>Contact Us</h2>
-          <strong>I’d love to hear from you!</strong>
-          <p>
-            For any questions about your order, custom requests, or details
-            about my ceramics, please reach out:
-          </p>
-          <p></p>
-          <p style="padding-left: 1em">
-            Instagram:
-            <a
-              href="https://www.instagram.com/kiln.kissed.ceramics"
-              target="_blank"
-              >@kiln.kissed.ceramics</a
-            ><br />
-          </p>
-          <p style="padding-left: 1em">
-            Email:
-            <a href="mailto:kiln.kissed.ceramics@gmail.com"
-              >kiln.kissed.ceramics@gmail.com</a
-            >
-          </p>
-          <script>
-            document
-              .querySelector(".contact-form")
-              ?.addEventListener("submit", async (e) => {
-                e.preventDefault();
-                const form = e.currentTarget;
-                const data = new FormData(form);
-                const res = await fetch(form.action, {
-                  method: form.method,
-                  body: data,
-                  headers: { Accept: "application/json" },
-                });
-                if (res.ok) {
-                  window.location.href = "thankyou.html";
-                } else {
-                  alert("Oops! There was a problem. Please try again.");
-                }
-              });
-          </script>
-          <p>I’ll get back to you as soon as I can!</p>
-        </div>
-        <form method="POST" action="https://formspree.io/f/xrbozlob">
-          <p></p>
-          <label for="name">Name</label>
-          <input id="name" name="name" placeholder="Your name" type="text" />
-          <label for="email">Email</label>
-          <input
-            id="email"
-            name="email"
-            placeholder="you@example.com"
-            type="email"
-          />
-          <label for="message">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            placeholder="Write your message here"
-            rows="5"
-          ></textarea>
-          <button type="submit">Send Message</button>
-        </form>
-        <p style="text-align: center; margin-top: 1rem"></p>
-      </section>
-    </main>
-    <footer>
-      <p>© 2025-26 Kiln Kissed Ceramics by Bhavya Kothari, Sunnyvale CA</p>
-    </footer>
-    <script>
-      (function () {
-        var toggle = document.querySelector("[data-nav-toggle]");
-        var overlay = document.querySelector("[data-nav-overlay]");
-        var closeBtn = document.querySelector("[data-nav-close]");
-        if (!toggle || !overlay) return;
-
-        function openNav() {
-          document.body.classList.add("nav-open");
-          toggle.setAttribute("aria-expanded", "true");
-        }
-
-        function closeNav() {
-          document.body.classList.remove("nav-open");
-          toggle.setAttribute("aria-expanded", "false");
-        }
-
-        toggle.addEventListener("click", function () {
-          if (document.body.classList.contains("nav-open")) {
-            closeNav();
-          } else {
-            openNav();
-          }
+      try {
+        var response = await fetch(form.action, {
+          method: form.method,
+          body: data,
+          headers: { Accept: "application/json" },
         });
 
-        overlay.addEventListener("click", closeNav);
-
-        if (closeBtn) {
-          closeBtn.addEventListener("click", closeNav);
+        if (response.ok) {
+          window.location.href = "thankyou.html";
+        } else {
+          alert("Oops! There was a problem. Please try again.");
         }
-
-        document.addEventListener("keydown", function (event) {
-          if (event.key === "Escape" || event.key === "Esc") {
-            if (document.body.classList.contains("nav-open")) {
-              closeNav();
-            }
-          }
-        });
-      })();
-    </script>
-  </body>
-</html>
+      } catch (error) {
+        alert("Oops! There was a problem. Please try again.");
+      }
+    });
+  });
+</script>

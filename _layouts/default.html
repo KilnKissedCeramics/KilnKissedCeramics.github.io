@@ -4,21 +4,29 @@
     {% include gtm-head.html %}
     {% include head.html %}
     {% if page.schema == "home" %}
-      {% include schema-home.html %}
+    {% include schema-home.html %}
+    {% elsif page.schema == "localbusiness" %}
+    {% include schema-localbusiness.html %}
     {% endif %}
   </head>
   <body>
     {% include gtm-body.html %}
+    {% unless page.hide_header %}
     {% include header.html %}
+    {% endunless %}
 
-    <main>
+    <main{% if page.main_class %} class="{{ page.main_class }}"{% endif %}>
       {{ content }}
     </main>
 
+    {% unless page.hide_footer %}
     {% include footer.html %}
+    {% endunless %}
+    {% unless page.hide_nav_script %}
     {% include nav-script.html %}
+    {% endunless %}
     {% if page.lightbox == "home" %}
-      {% include lightbox-home.html %}
+    {% include lightbox-home.html %}
     {% endif %}
   </body>
 </html>
