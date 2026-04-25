@@ -1,0 +1,55 @@
+<div class="lightbox-overlay" data-lightbox="">
+  <div class="lightbox-content">
+    <button aria-label="Close image" class="lightbox-close" type="button">
+      ×
+    </button>
+    <img alt="Expanded view" class="lightbox-image" loading="lazy" src="" />
+  </div>
+</div>
+<script>
+  (function () {
+    var overlay = document.querySelector("[data-lightbox]");
+    if (!overlay) return;
+    var imgEl = overlay.querySelector(".lightbox-image");
+    var closeBtn = overlay.querySelector(".lightbox-close");
+
+    function openLightbox(src, alt) {
+      imgEl.src = src;
+      if (alt) imgEl.alt = alt;
+      overlay.classList.add("is-open");
+    }
+
+    function closeLightbox() {
+      overlay.classList.remove("is-open");
+      imgEl.src = "";
+    }
+
+    document.addEventListener("click", function (event) {
+      var trigger = event.target.closest(".lightbox-trigger");
+      if (!trigger) return;
+      event.preventDefault();
+      var fullSrc =
+        trigger.getAttribute("data-full") || trigger.getAttribute("src");
+      var alt = trigger.getAttribute("alt") || "Expanded view";
+      openLightbox(fullSrc, alt);
+    });
+
+    overlay.addEventListener("click", function (event) {
+      if (event.target === overlay) {
+        closeLightbox();
+      }
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", closeLightbox);
+    }
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" || event.key === "Esc") {
+        if (overlay.classList.contains("is-open")) {
+          closeLightbox();
+        }
+      }
+    });
+  })();
+</script>

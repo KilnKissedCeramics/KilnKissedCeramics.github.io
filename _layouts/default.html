@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include gtm-head.html %}
+    {% include head.html %}
+    {% if page.schema == "home" %}
+      {% include schema-home.html %}
+    {% endif %}
+  </head>
+  <body>
+    {% include gtm-body.html %}
+    {% include header.html %}
+
+    <main>
+      {{ content }}
+    </main>
+
+    {% include footer.html %}
+    {% include nav-script.html %}
+    {% if page.lightbox == "home" %}
+      {% include lightbox-home.html %}
+    {% endif %}
+  </body>
+</html>
