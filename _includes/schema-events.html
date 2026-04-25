@@ -1,0 +1,62 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {% assign sorted_events = site.event_data | sort: "start_date" %}
+    {% assign now_seconds = "now" | date: "%s" | plus: 0 %}
+    {% assign emitted_count = 0 %}
+    {% for event in sorted_events %}
+      {% assign buffer_days = event.status_buffer_days | default: 2 %}
+      {% assign buffer_seconds = buffer_days | times: 86400 %}
+      {% assign event_end_seconds = event.end_date | date: "%s" | plus: 0 %}
+      {% assign active_until_seconds = event_end_seconds | plus: buffer_seconds %}
+      {% if active_until_seconds >= now_seconds %}
+        {% if emitted_count > 0 %},{% endif %}
+        {
+          "@type": "Event",
+          "@id": "{{ site.url }}/events/#event-{{ event.slug }}",
+          "name": {{ event.title | jsonify }},
+          {% if event.start_time and event.end_time and event.timezone %}
+          "startDate": "{{ event.start_date | date: "%Y-%m-%d" }}T{{ event.start_time }}:00{{ event.timezone }}",
+          "endDate": "{{ event.end_date | date: "%Y-%m-%d" }}T{{ event.end_time }}:00{{ event.timezone }}",
+          {% else %}
+          "startDate": "{{ event.start_date | date: "%Y-%m-%d" }}",
+          "endDate": "{{ event.end_date | date: "%Y-%m-%d" }}",
+          {% endif %}
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "url": {{ event.external_url | jsonify }},
+          "image": [
+            "{{ site.url }}{{ event.image }}"
+          ],
+          "location": {
+            "@type": "Place",
+            "name": {{ event.venue | jsonify }},
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": {{ event.street_address | jsonify }},
+              "addressLocality": {{ event.locality | jsonify }},
+              "addressRegion": {{ event.region | jsonify }},
+              "postalCode": {{ event.postal_code | jsonify }},
+              "addressCountry": {{ event.country | jsonify }}
+            }
+          },
+          "organizer": {
+            "@type": "Organization",
+            "name": {{ event.organizer | jsonify }},
+            "url": {{ event.organizer_url | jsonify }}
+          },
+          "attendee": [
+            {
+              "@type": "Organization",
+              "name": "Kiln Kissed Ceramics",
+              "url": "{{ site.url }}/"
+            }
+          ]
+        }
+        {% assign emitted_count = emitted_count | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+  ]
+}
+</script>

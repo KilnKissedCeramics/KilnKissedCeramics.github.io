@@ -1,0 +1,191 @@
+<script>
+  (function () {
+    var eventsScript = document.getElementById("event-lightbox-data");
+    var lightbox = document.querySelector("[data-event-lightbox]");
+    if (!eventsScript || !lightbox) return;
+
+    var events = [];
+    try {
+      events = JSON.parse(eventsScript.textContent || "[]");
+    } catch (error) {
+      events = [];
+    }
+    if (!events.length) return;
+
+    var panel = lightbox.querySelector("[data-event-lightbox-panel]");
+    var closeBtn = lightbox.querySelector("[data-event-lightbox-close]");
+    var backdrop = lightbox.querySelector("[data-event-lightbox-backdrop]");
+    var prevBtn = lightbox.querySelector("[data-event-lightbox-prev]");
+    var nextBtn = lightbox.querySelector("[data-event-lightbox-next]");
+    var statusLabel = lightbox.querySelector("[data-event-lightbox-status]");
+    var image = lightbox.querySelector("[data-event-lightbox-image]");
+    var title = lightbox.querySelector("[data-event-lightbox-title]");
+    var date = lightbox.querySelector("[data-event-lightbox-date]");
+    var time = lightbox.querySelector("[data-event-lightbox-time]");
+    var venue = lightbox.querySelector("[data-event-lightbox-venue]");
+    var address = lightbox.querySelector("[data-event-lightbox-address]");
+    var description = lightbox.querySelector("[data-event-lightbox-description]");
+    var externalLink = lightbox.querySelector("[data-event-lightbox-external]");
+
+    var currentIndex = -1;
+    var lastTrigger = null;
+
+    function pushDataLayer(payload) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(payload);
+    }
+
+    function eventPayload(eventItem) {
+      return {
+        event_name: eventItem.title,
+        event_slug: eventItem.slug,
+        event_start_date: eventItem.start_date,
+        event_status: eventItem.status
+      };
+    }
+
+    function renderEvent(index) {
+      var eventItem = events[index];
+      if (!eventItem) return;
+      currentIndex = index;
+
+      image.src = eventItem.image;
+      image.alt = eventItem.image_alt || eventItem.title;
+      title.textContent = eventItem.title;
+      date.innerHTML = "<strong>When:</strong> " + eventItem.display_date;
+      time.innerHTML = eventItem.time ? "<strong>Time:</strong> " + eventItem.time : "";
+      venue.innerHTML = "<strong>Where:</strong> " + eventItem.venue;
+      address.innerHTML = "<strong>Address:</strong> " + eventItem.address;
+      description.innerHTML = eventItem.description || "";
+
+      if (eventItem.status === "past") {
+        statusLabel.hidden = false;
+        statusLabel.textContent = "Past Event";
+      } else {
+        statusLabel.hidden = true;
+        statusLabel.textContent = "";
+      }
+
+      if (eventItem.external_url) {
+        externalLink.hidden = false;
+        externalLink.href = eventItem.external_url;
+        externalLink.textContent = eventItem.external_label || "Event website";
+        externalLink.setAttribute("data-event-slug", eventItem.slug);
+      } else {
+        externalLink.hidden = true;
+        externalLink.removeAttribute("href");
+      }
+
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === events.length - 1;
+    }
+
+    function openLightbox(index, source, trigger) {
+      lastTrigger = trigger || document.activeElement;
+      renderEvent(index);
+      lightbox.hidden = false;
+      document.body.classList.add("event-lightbox-open");
+      closeBtn.focus();
+
+      var payload = eventPayload(events[index]);
+      payload.event = "event_lightbox_open";
+      payload.interaction_source = source || "unknown";
+      payload.open_source = source || "unknown";
+      pushDataLayer(payload);
+    }
+
+    function closeLightbox(source) {
+      if (lightbox.hidden || currentIndex < 0) return;
+      var eventItem = events[currentIndex];
+      lightbox.hidden = true;
+      document.body.classList.remove("event-lightbox-open");
+
+      var payload = eventPayload(eventItem);
+      payload.event = "event_lightbox_close";
+      payload.close_source = source || "unknown";
+      pushDataLayer(payload);
+
+      if (lastTrigger && typeof lastTrigger.focus === "function") {
+        lastTrigger.focus();
+      }
+    }
+
+    function navigate(direction) {
+      var nextIndex = currentIndex + direction;
+      if (nextIndex < 0 || nextIndex >= events.length) return;
+      renderEvent(nextIndex);
+
+      var payload = eventPayload(events[nextIndex]);
+      payload.event = "event_lightbox_navigate";
+      payload.navigation_direction = direction > 0 ? "next" : "previous";
+      pushDataLayer(payload);
+    }
+
+    document.addEventListener("click", function (clickEvent) {
+      var trigger = clickEvent.target.closest("[data-event-open]");
+      if (!trigger) return;
+      var slug = trigger.getAttribute("data-event-open");
+      var source = trigger.getAttribute("data-event-open-source") || "unknown";
+      var index = events.findIndex(function (eventItem) {
+        return eventItem.slug === slug;
+      });
+      if (index === -1) return;
+      openLightbox(index, source, trigger);
+    });
+
+    document.addEventListener("click", function (clickEvent) {
+      var link = clickEvent.target.closest("[data-event-external-link], [data-event-lightbox-external]");
+      if (!link) return;
+      var slug = link.getAttribute("data-event-slug");
+      var eventItem = events.find(function (item) {
+        return item.slug === slug;
+      });
+      if (!eventItem) return;
+      var payload = eventPayload(eventItem);
+      payload.event = "event_external_click";
+      payload.interaction_source = link.hasAttribute("data-event-lightbox-external") ? "lightbox" : "card";
+      pushDataLayer(payload);
+    });
+
+    closeBtn.addEventListener("click", function () {
+      closeLightbox("x_button");
+    });
+
+    backdrop.addEventListener("click", function () {
+      closeLightbox("backdrop");
+    });
+
+    prevBtn.addEventListener("click", function () {
+      navigate(-1);
+    });
+
+    nextBtn.addEventListener("click", function () {
+      navigate(1);
+    });
+
+    document.addEventListener("keydown", function (keyEvent) {
+      if (lightbox.hidden) return;
+      if (keyEvent.key === "Escape" || keyEvent.key === "Esc") {
+        closeLightbox("escape_key");
+      } else if (keyEvent.key === "ArrowLeft") {
+        navigate(-1);
+      } else if (keyEvent.key === "ArrowRight") {
+        navigate(1);
+      } else if (keyEvent.key === "Tab") {
+        var focusable = panel.querySelectorAll(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusable.length) return;
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (keyEvent.shiftKey && document.activeElement === first) {
+          keyEvent.preventDefault();
+          last.focus();
+        } else if (!keyEvent.shiftKey && document.activeElement === last) {
+          keyEvent.preventDefault();
+          first.focus();
+        }
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,213 @@
+---
+layout: default
+title: "Events | Kiln Kissed Ceramics"
+description: "Find upcoming Kiln Kissed Ceramics in-person events, craft fairs, and maker markets across the South Bay and Silicon Valley."
+permalink: /events/
+canonical_url: "https://www.kilnkissedceramics.com/events/"
+robots: "index,follow"
+og_type: "website"
+og_url: "https://www.kilnkissedceramics.com/events/"
+og_title: "Events | Kiln Kissed Ceramics"
+og_description: "Find upcoming Kiln Kissed Ceramics in-person events, craft fairs, and maker markets across the South Bay and Silicon Valley."
+og_image: "https://www.kilnkissedceramics.com/assets/banner/banner-og-1200x630.jpg"
+og_image_alt: "Handmade ceramics with glossy, colorful glaze by Kiln Kissed Ceramics"
+twitter_card: "summary_large_image"
+---
+
+{% include styles-events.html %} {% include schema-events.html %} {% assign
+sorted_events = site.event_data | sort: "start_date" %} {% assign now_seconds =
+"now" | date: "%s" | plus: 0 %} {% assign active_event_count = 0 %}
+
+<div class="events-wrap">
+  <div class="events-page-card">
+    <h1>Upcoming Events</h1>
+    <p class="events-intro">
+      Come shop Kiln Kissed Ceramics at upcoming local markets and ceramic art
+      events across the South Bay.
+    </p>
+
+    <section
+      aria-label="Upcoming Kiln Kissed Ceramics events"
+      class="events-list"
+    >
+      {% for event in sorted_events %} {% assign buffer_days =
+      event.status_buffer_days | default: 2 %} {% assign buffer_seconds =
+      buffer_days | times: 86400 %} {% assign event_end_seconds = event.end_date
+      | date: "%s" | plus: 0 %} {% assign active_until_seconds =
+      event_end_seconds | plus: buffer_seconds %} {% if active_until_seconds >=
+      now_seconds %} {% assign active_event_count = active_event_count | plus: 1
+      %}
+      <article class="event-card" id="event-{{ event.slug }}">
+        <button
+          aria-label="View details for {{ event.title | escape }}"
+          class="event-image-button"
+          data-event-open="{{ event.slug }}"
+          data-event-open-source="image"
+          type="button"
+        >
+          <img
+            alt="{{ event.image_alt | escape }}"
+            loading="lazy"
+            src="{{ event.image | relative_url }}"
+          />
+        </button>
+        <div class="event-description">
+          <h2>
+            <button
+              class="event-title-button"
+              data-event-open="{{ event.slug }}"
+              data-event-open-source="title"
+              type="button"
+            >
+              {{ event.title }}
+            </button>
+          </h2>
+          <button
+            class="event-text-button"
+            data-event-open="{{ event.slug }}"
+            data-event-open-source="details_text"
+            type="button"
+          >
+            <span class="event-meta-row"
+              ><strong>When:</strong> {{ event.display_date }}</span
+            >
+            {% if event.time %}<span class="event-meta-row"
+              ><strong>Time:</strong> {{ event.time }}</span
+            >{% endif %}
+            <span class="event-meta-row"
+              ><strong>Where:</strong> {{ event.venue }}</span
+            >
+            <span class="event-meta-row"
+              ><strong>Address:</strong> {{ event.address }}</span
+            >
+            <span class="event-note"
+              >{{ event.content | strip_html | strip }}</span
+            >
+          </button>
+          <div class="event-actions">
+            <button
+              class="event-details-button"
+              data-event-open="{{ event.slug }}"
+              data-event-open-source="view_details_button"
+              type="button"
+            >
+              View details
+            </button>
+            {% if event.external_url %}
+            <a
+              class="event-external-link"
+              data-event-external-link
+              data-event-slug="{{ event.slug }}"
+              href="{{ event.external_url }}"
+              rel="noopener"
+              target="_blank"
+              >{{ event.external_label | default: "Event website" }}</a
+            >
+            {% endif %}
+          </div>
+        </div>
+      </article>
+      {% endif %} {% endfor %}
+    </section>
+
+    {% if active_event_count == 0 %}
+    <p class="events-empty-message">
+      No upcoming events are listed right now. Please check back soon, or follow
+      Kiln Kissed Ceramics on Instagram for updates.
+    </p>
+    {% endif %}
+  </div>
+</div>
+
+<div
+  aria-labelledby="event-lightbox-title"
+  aria-modal="true"
+  class="event-lightbox"
+  data-event-lightbox
+  hidden
+  role="dialog"
+>
+  <div class="event-lightbox-backdrop" data-event-lightbox-backdrop></div>
+  <div class="event-lightbox-panel" data-event-lightbox-panel>
+    <button
+      aria-label="Close event details"
+      class="event-lightbox-close"
+      data-event-lightbox-close
+      type="button"
+    >
+      ×
+    </button>
+    <div class="event-lightbox-content">
+      <div class="event-lightbox-image">
+        <img alt="" data-event-lightbox-image src="" />
+      </div>
+      <div class="event-lightbox-details">
+        <span
+          class="event-status-label"
+          data-event-lightbox-status
+          hidden
+        ></span>
+        <h2
+          class="event-lightbox-title"
+          data-event-lightbox-title
+          id="event-lightbox-title"
+        ></h2>
+        <div class="event-lightbox-description">
+          <p data-event-lightbox-date></p>
+          <p data-event-lightbox-time></p>
+          <p data-event-lightbox-venue></p>
+          <p data-event-lightbox-address></p>
+          <div data-event-lightbox-description></div>
+        </div>
+        <p>
+          <a
+            class="event-lightbox-link"
+            data-event-lightbox-external
+            href="#"
+            rel="noopener"
+            target="_blank"
+            >Event website</a
+          >
+        </p>
+      </div>
+    </div>
+    <div class="event-lightbox-nav" aria-label="Event details navigation">
+      <button data-event-lightbox-prev type="button">← Previous</button>
+      <button data-event-lightbox-next type="button">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script id="event-lightbox-data" type="application/json">
+  [
+    {% for event in sorted_events %}
+      {% assign buffer_days = event.status_buffer_days | default: 2 %}
+      {% assign buffer_seconds = buffer_days | times: 86400 %}
+      {% assign event_end_seconds = event.end_date | date: "%s" | plus: 0 %}
+      {% assign active_until_seconds = event_end_seconds | plus: buffer_seconds %}
+      {% if active_until_seconds >= now_seconds %}
+        {% assign event_status = "active" %}
+      {% else %}
+        {% assign event_status = "past" %}
+      {% endif %}
+      {
+        "title": {{ event.title | jsonify }},
+        "slug": {{ event.slug | jsonify }},
+        "start_date": {{ event.start_date | date: "%Y-%m-%d" | jsonify }},
+        "end_date": {{ event.end_date | date: "%Y-%m-%d" | jsonify }},
+        "display_date": {{ event.display_date | jsonify }},
+        "time": {{ event.time | jsonify }},
+        "venue": {{ event.venue | jsonify }},
+        "address": {{ event.address | jsonify }},
+        "external_url": {{ event.external_url | jsonify }},
+        "external_label": {{ event.external_label | jsonify }},
+        "image": {{ event.image | relative_url | jsonify }},
+        "image_alt": {{ event.image_alt | jsonify }},
+        "description": {{ event.content | markdownify | strip_newlines | jsonify }},
+        "status": {{ event_status | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+</script>
+
+{% include script-events-lightbox.html %}

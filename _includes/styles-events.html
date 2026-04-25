@@ -1,0 +1,335 @@
+<style>
+  .events-wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .events-page-card {
+    margin: 0 auto;
+    max-width: 920px;
+    text-align: left;
+    padding: 24px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(26, 77, 180, 0.06);
+  }
+
+  .events-page-card > h1,
+  .events-page-card > .events-intro,
+  .events-empty-message {
+    text-align: center;
+  }
+
+  .events-page-card h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .events-intro {
+    margin-bottom: 1.25rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .event-card {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1.4fr);
+    gap: 1.25rem;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid rgba(26, 77, 180, 0.1);
+    border-radius: 16px;
+    background: #ffffff;
+  }
+
+  .event-image-button,
+  .event-title-button,
+  .event-text-button {
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .event-image-button {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    min-height: 190px;
+    padding: 0.75rem;
+    border-radius: 12px;
+    background: #f4f4f4;
+    overflow: hidden;
+  }
+
+  .event-card img,
+  .event-lightbox-image img {
+    display: block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .event-card img {
+    max-height: 260px;
+  }
+
+  .event-card h2 {
+    font-size: 1.35rem;
+    line-height: 1.25;
+    margin-bottom: 0.65rem;
+  }
+
+  .event-title-button {
+    color: #1a4db4;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .event-title-button:hover,
+  .event-title-button:focus {
+    color: #e76dba;
+    text-decoration-thickness: 3px;
+  }
+
+  .event-card p,
+  .event-meta-row {
+    margin-bottom: 0.45rem;
+  }
+
+  .event-card p:last-child,
+  .event-meta-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .event-meta-row,
+  .event-note {
+    display: block;
+  }
+
+  .event-note {
+    margin-top: 0.6rem;
+  }
+
+  .event-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .event-details-button,
+  .event-external-link,
+  .event-lightbox-link {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      transform 0.06s ease,
+      opacity 0.2s ease;
+  }
+
+  .event-details-button,
+  .event-lightbox-link {
+    border: 0;
+    background: #1a4db4;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .event-external-link {
+    border: 1px solid rgba(26, 77, 180, 0.18);
+    background: #fff;
+    color: #1a4db4;
+  }
+
+  .event-details-button:hover,
+  .event-details-button:focus,
+  .event-external-link:hover,
+  .event-external-link:focus,
+  .event-lightbox-link:hover,
+  .event-lightbox-link:focus {
+    transform: translateY(-1px);
+    opacity: 0.95;
+  }
+
+  .event-lightbox[hidden] {
+    display: none;
+  }
+
+  .event-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+  }
+
+  .event-lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.46);
+  }
+
+  .event-lightbox-panel {
+    position: relative;
+    z-index: 1;
+    width: min(920px, 100%);
+    max-height: min(760px, 92vh);
+    overflow: auto;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
+  }
+
+  .event-lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid rgba(26, 77, 180, 0.18);
+    background: #ffffff;
+    color: #1a4db4;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .event-lightbox-content {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.9fr) minmax(0, 1.2fr);
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  .event-lightbox-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    padding: 0.75rem;
+    border-radius: 14px;
+    background: #f4f4f4;
+  }
+
+  .event-lightbox-image img {
+    max-height: 360px;
+  }
+
+  .event-status-label {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    padding: 0.28rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(26, 77, 180, 0.08);
+    color: #1a4db4;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .event-lightbox-title {
+    margin-bottom: 0.85rem;
+    font-size: 1.55rem;
+    line-height: 1.25;
+  }
+
+  .event-lightbox-description p {
+    margin-bottom: 0.55rem;
+    line-height: 1.65;
+  }
+
+  .event-lightbox-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0 1.5rem 1.5rem;
+  }
+
+  .event-lightbox-nav button {
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(26, 77, 180, 0.18);
+    background: #ffffff;
+    color: #1a4db4;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .event-lightbox-nav button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  body.event-lightbox-open {
+    overflow: hidden;
+  }
+
+  @media (max-width: 900px) {
+    .events-page-card {
+      padding: 20px 16px;
+    }
+
+    .event-card,
+    .event-lightbox-content {
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+    }
+
+    .event-image-button {
+      min-height: 160px;
+    }
+
+    .event-card img {
+      max-height: 230px;
+    }
+
+    .event-lightbox {
+      align-items: stretch;
+      padding: 0;
+    }
+
+    .event-lightbox-panel {
+      width: 100%;
+      max-height: 100vh;
+      border-radius: 0;
+    }
+
+    .event-lightbox-content {
+      padding: 4rem 1rem 1rem;
+    }
+
+    .event-lightbox-image {
+      min-height: 170px;
+    }
+
+    .event-lightbox-image img {
+      max-height: 260px;
+    }
+
+    .event-lightbox-nav {
+      padding: 0 1rem 1rem;
+    }
+  }
+</style>
