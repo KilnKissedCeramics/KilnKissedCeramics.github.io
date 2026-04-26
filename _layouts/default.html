@@ -3,16 +3,18 @@
   <head>
     {% include gtm-head.html %}
     {% include head.html %}
-    {% if page.page_styles == "gallery" %}
-    {% include styles-gallery.html %}
-    {% endif %}
+
     {% if page.schema == "home" %}
-    {% include schema-home.html %}
+      {% include schema-localbusiness.html %}
+      {% include schema-events.html %}
     {% elsif page.schema == "localbusiness" %}
-    {% include schema-localbusiness.html %}
+      {% include schema-localbusiness.html %}
+    {% elsif page.schema == "events" %}
+      {% include schema-localbusiness.html %}
+      {% include schema-events.html %}
     {% elsif page.schema == "gallery" %}
-    {% include schema-localbusiness.html %}
-    {% include schema-gallery.html %}
+      {% include schema-localbusiness.html %}
+      {% include schema-gallery.html %}
     {% endif %}
   </head>
   <body>

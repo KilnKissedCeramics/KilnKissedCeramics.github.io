@@ -1,10 +1,10 @@
 ---
-title: "OVCAG Spring Sale"
+title: "OVCAG Art in Clay Spring Sale 2026"
 slug: "ovcag-spring-sale-2026"
 start_date: 2026-04-17
 end_date: 2026-04-19
-display_date: "April 17, 2026 (5:30–8:30 PM); April 18, 2026 (10:00 AM–5:00 PM); April 19, 2026 (11:00 AM–3:00 PM)"
-time: "Opening night Friday, plus Saturday and Sunday shopping hours"
+display_date: "April 17 - 19, 2026"
+time: "Fri: 5:30 - 8:30 PM, Sat: 10AM - 5PM, Sun: 11AM - 3PM"
 start_time: "17:30"
 end_time: "15:00"
 timezone: "-07:00"
