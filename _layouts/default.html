@@ -3,10 +3,16 @@
   <head>
     {% include gtm-head.html %}
     {% include head.html %}
+    {% if page.page_styles == "gallery" %}
+    {% include styles-gallery.html %}
+    {% endif %}
     {% if page.schema == "home" %}
     {% include schema-home.html %}
     {% elsif page.schema == "localbusiness" %}
     {% include schema-localbusiness.html %}
+    {% elsif page.schema == "gallery" %}
+    {% include schema-localbusiness.html %}
+    {% include schema-gallery.html %}
     {% endif %}
   </head>
   <body>
@@ -27,6 +33,8 @@
     {% endunless %}
     {% if page.lightbox == "home" %}
     {% include lightbox-home.html %}
+    {% elsif page.lightbox == "gallery" %}
+    {% include lightbox-gallery.html %}
     {% endif %}
   </body>
 </html>
