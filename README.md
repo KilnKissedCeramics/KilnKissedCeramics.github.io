@@ -18,6 +18,7 @@ Typical structure:
 - `_config.yml` – Jekyll configuration, including the Events collection
 - `_layouts/default.html` – Shared HTML shell for pages
 - `_includes/` – Shared and page-specific includes for head metadata, GTM, header, footer, styles, schema, navigation script, and lightboxes
+- `_data/` – YAML data used by Jekyll-rendered pages, including Contact form configuration
 - `_event_data/` – One markdown file per event; used to render the Events page and Event schema
 - `index.html` – Home page
 - `gallery.html` – Photo gallery of recent work with a lightbox viewer
@@ -26,6 +27,7 @@ Typical structure:
 - `contact.html` – Contact form and social links
 - `thankyou.html` – Simple thank-you page after form submission
 - `events/index.html` – Public Events page, available at `/events/`
+- `pop-ups/workplace/index.html` – Direct-link landing page for Bay Area workplace pop-ups, available at `/pop-ups/workplace/`
 - `events/YYYY/event-slug/` – Event image folders
 - `style.css` – Shared site-wide styles
 - `robots.txt` – Basic crawler instructions
@@ -57,6 +59,8 @@ Shared layout and includes:
   - `_includes/styles-shop.html`
   - `_includes/styles-events.html`
   - `_includes/styles-gallery.html`
+  - `_includes/styles-contact.html`
+  - `_includes/styles-workplace-popups.html`
   - `_includes/lightbox-home.html`
   - `_includes/lightbox-gallery.html`
   - `_includes/schema-localbusiness.html`
@@ -77,6 +81,41 @@ page_styles: gallery
 lightbox: gallery
 ---
 ```
+
+---
+
+## Workplace pop-ups and Contact form
+
+The site includes a direct-link landing page for workplace pop-ups:
+
+```text
+/pop-ups/workplace/
+```
+
+This page is intentionally **not** in the main navigation or footer. It is linked from the Home page "Buy in Person" section and can also be shared directly.
+
+The workplace page CTA buttons link to the Contact form with a query parameter and anchor:
+
+```text
+/contact.html?inquiry=workplace_popup#workplace-inquiry
+```
+
+That URL scrolls to the workplace inquiry card and pre-selects the "Workplace pop-up / employee market" inquiry type.
+
+The Contact form is configured through:
+
+```text
+_data/contact_form.yml
+```
+
+Important Contact form behavior:
+
+- The existing Formspree endpoint is reused; there is no separate workplace form.
+- Common fields are always shown.
+- Inquiry-specific field groups are controlled by lightweight JavaScript in `contact.html`.
+- Inactive field groups are hidden and disabled so irrelevant fields do not submit to Formspree.
+- Required markers are rendered from the YAML `required` flags.
+- Stable `name` values and inquiry `value` values should not be changed casually because they affect Formspree submission keys and conditional behavior.
 
 ---
 
@@ -207,6 +246,8 @@ http://localhost:4000/shop.html
 http://localhost:4000/about.html
 http://localhost:4000/contact.html
 http://localhost:4000/events/
+http://localhost:4000/pop-ups/workplace/
+http://localhost:4000/contact.html?inquiry=workplace_popup#workplace-inquiry
 ```
 
 > Note: Some browser privacy settings or extensions may block GTM/GA4 requests. This only affects analytics testing, not the basic site layout.
@@ -239,6 +280,8 @@ General guidelines for future updates:
 - Keep GTM and GA4 logic centralized through shared includes and GTM.
 - Use `dataLayer.push()` for custom interaction tracking.
 - Do not duplicate full HTML shell code inside individual pages.
+- Keep Contact form labels/options in `_data/contact_form.yml` where possible.
+- Use `page_styles` front matter and `_includes/styles-*.html` for page-specific CSS.
 
 ---
 

@@ -8,7 +8,10 @@ og_description: Get in touch with Kiln Kissed Ceramics in Sunnyvale, CA. Send a 
 og_image: https://www.kilnkissedceramics.com/assets/banner/banner-og-1200x630.jpg
 og_image_alt: Handmade ceramics with glossy, colorful glaze by Kiln Kissed Ceramics
 schema: localbusiness
+page_styles: contact
 ---
+
+{% assign contact_form = site.data.contact_form %}
 
 <section>
   <div class="contact-intro">
@@ -39,29 +42,106 @@ schema: localbusiness
     <p>I’ll get back to you as soon as I can!</p>
   </div>
 
+  <div
+    class="contact-inquiry-card"
+    id="workplace-inquiry"
+    aria-labelledby="workplace-inquiry-title"
+  >
+    <h3 id="workplace-inquiry-title">
+      {{ contact_form.workplace_card.heading }}
+    </h3>
+    <p>{{ contact_form.workplace_card.body }}</p>
+  </div>
+
   <form
     class="contact-form"
     method="POST"
     action="https://formspree.io/f/xrbozlob"
   >
-    <label for="name">Name</label>
-    <input id="name" name="name" placeholder="Your name" type="text" />
+    <p class="contact-required-note">
+      Required fields are marked with
+      <span class="contact-required-marker" aria-hidden="true">*</span>.
+    </p>
 
-    <label for="email">Email</label>
-    <input
-      id="email"
-      name="email"
-      placeholder="you@example.com"
-      type="email"
-    />
+    <div class="contact-field-grid">
+      {% for field in contact_form.common_fields %} {% assign field_id =
+      "contact-" | append: field.name | replace: "_", "-" %}
+      <div class="contact-field contact-field--{{ field.width }}">
+        <label for="{{ field_id }}"
+          >{{ field.label }}{% if field.required %}
+          <span class="contact-required-marker" aria-hidden="true">*</span>
+          <span class="sr-only">required</span>{% endif %}</label
+        >
+        {% if field.type == "select" %}
+        <select
+          id="{{ field_id }}"
+          name="{{ field.name }}"
+          {% if field.required %}required{% endif %}
+          data-inquiry-type-select
+        >
+          {% for option in contact_form.inquiry_types %}
+          <option
+            value="{{ option.value | escape }}"
+            data-field-group="{{ option.field_group | escape }}"
+          >
+            {{ option.label }}
+          </option>
+          {% endfor %}
+        </select>
+        {% else %}
+        <input
+          id="{{ field_id }}"
+          name="{{ field.name }}"
+          {% if field.required %}required{% endif %}
+          type="{{ field.type | default: 'text' }}"
+        />
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
 
-    <label for="message">Message</label>
-    <textarea
-      id="message"
-      name="message"
-      placeholder="Write your message here"
-      rows="5"
-    ></textarea>
+    {% for group_pair in contact_form.field_groups %} {% assign group_key =
+    group_pair[0] %} {% assign group = group_pair[1] %}
+    <fieldset
+      class="contact-field-group"
+      data-contact-field-group="{{ group_key }}"
+      data-contact-conditional-group
+    >
+      <legend>{{ group.heading }}</legend>
+      {% if group.helper_text %}
+      <p class="contact-field-group-helper">{{ group.helper_text }}</p>
+      {% endif %}
+      <div class="contact-field-grid">
+        {% for field in group.fields %} {% assign field_id = "contact-" |
+        append: field.name | replace: "_", "-" %}
+        <div class="contact-field contact-field--{{ field.width }}">
+          <label for="{{ field_id }}"
+            >{{ field.label }}{% if field.required %}
+            <span class="contact-required-marker" aria-hidden="true">*</span>
+            <span class="sr-only">required</span>{% endif %}</label
+          >
+          {% if field.type == "textarea" %}
+          <textarea
+            id="{{ field_id }}"
+            name="{{ field.name }}"
+            rows="{{ field.rows | default: 5 }}"
+            data-conditional-field
+            data-required="{{ field.required }}"
+          ></textarea>
+          {% else %}
+          <input
+            id="{{ field_id }}"
+            name="{{ field.name }}"
+            type="{{ field.type | default: 'text' }}"
+            data-conditional-field
+            data-required="{{ field.required }}"
+          />
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </fieldset>
+    {% endfor %}
 
     <button type="submit">Send Message</button>
   </form>
@@ -73,6 +153,63 @@ schema: localbusiness
   document.addEventListener("DOMContentLoaded", function () {
     var form = document.querySelector(".contact-form");
     if (!form) return;
+
+    var inquirySelect = form.querySelector("[data-inquiry-type-select]");
+    var conditionalGroups = form.querySelectorAll(
+      "[data-contact-conditional-group]"
+    );
+
+    function setConditionalFieldState(group, isActive) {
+      var fields = group.querySelectorAll("[data-conditional-field]");
+
+      group.hidden = !isActive;
+      group.setAttribute("aria-hidden", isActive ? "false" : "true");
+      fields.forEach(function (field) {
+        field.disabled = !isActive;
+        field.required = isActive && field.dataset.required === "true";
+      });
+    }
+
+    function updateVisibleFieldGroup() {
+      if (!inquirySelect) return;
+
+      var selectedOption = inquirySelect.options[inquirySelect.selectedIndex];
+      var activeGroup = selectedOption
+        ? selectedOption.dataset.fieldGroup
+        : "";
+
+      conditionalGroups.forEach(function (group) {
+        setConditionalFieldState(
+          group,
+          group.dataset.contactFieldGroup === activeGroup
+        );
+      });
+    }
+
+    function applyInquiryFromQuery() {
+      if (!inquirySelect) return;
+
+      var params = new URLSearchParams(window.location.search);
+      var requestedInquiry = params.get("inquiry");
+      if (!requestedInquiry) return;
+
+      var matchingOption = Array.prototype.find.call(
+        inquirySelect.options,
+        function (option) {
+          return option.value === requestedInquiry;
+        }
+      );
+
+      if (matchingOption) {
+        inquirySelect.value = requestedInquiry;
+      }
+    }
+
+    if (inquirySelect && conditionalGroups.length) {
+      inquirySelect.addEventListener("change", updateVisibleFieldGroup);
+      applyInquiryFromQuery();
+      updateVisibleFieldGroup();
+    }
 
     form.addEventListener("submit", async function (event) {
       event.preventDefault();

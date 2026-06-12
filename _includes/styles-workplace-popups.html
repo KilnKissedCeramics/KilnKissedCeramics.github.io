@@ -1,0 +1,221 @@
+<style>
+  .workplace-popups {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 1.25rem 2rem;
+  }
+
+  .workplace-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.78fr);
+    gap: 1.5rem;
+    align-items: center;
+    padding: 0.75rem 0 1.75rem;
+  }
+
+  .workplace-hero h1 {
+    max-width: 620px;
+    margin-bottom: 0.85rem;
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    line-height: 1.18;
+  }
+
+  .workplace-hero p {
+    max-width: 620px;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .workplace-hero p:last-of-type {
+    margin-bottom: 1.2rem;
+  }
+
+  .workplace-hero-image {
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    background: var(--gray);
+    box-shadow: 0 6px 18px rgba(26, 77, 180, 0.08);
+  }
+
+  .workplace-hero-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .workplace-hero--banner {
+    display: block;
+    max-width: 860px;
+    margin: 0 auto;
+    padding-top: 0.5rem;
+    text-align: center;
+  }
+
+  .workplace-hero--banner .workplace-hero-image {
+    margin-bottom: 1.5rem;
+    max-height: 360px;
+  }
+
+  .workplace-hero--banner .workplace-hero-image img {
+    height: min(360px, 52vw);
+    object-fit: cover;
+  }
+
+  .workplace-hero--banner h1,
+  .workplace-hero--banner p {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .workplace-hero--text-only {
+    display: block;
+    max-width: 760px;
+    margin: 0 auto 0.5rem;
+    padding: 2rem 1.5rem;
+    border-radius: 8px;
+    background: var(--gray);
+    text-align: center;
+  }
+
+  .workplace-hero--text-only h1,
+  .workplace-hero--text-only p {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .workplace-hero--text-first {
+    padding-top: 0.5rem;
+  }
+
+  .workplace-hero--text-first .workplace-hero-image {
+    margin-top: 1.5rem;
+    max-height: 300px;
+  }
+
+  .workplace-hero--text-first .workplace-hero-image img {
+    height: min(300px, 46vw);
+    object-fit: cover;
+  }
+
+  .workplace-button {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: var(--blue);
+    color: var(--white);
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      transform 0.06s ease,
+      opacity 0.2s ease;
+  }
+
+  .workplace-button:hover,
+  .workplace-button:focus {
+    color: var(--white);
+    transform: translateY(-1px);
+    opacity: 0.95;
+  }
+
+  .workplace-section {
+    padding: 1.25rem 0;
+  }
+
+  .workplace-section h2,
+  .workplace-cta h2 {
+    margin-bottom: 0.8rem;
+    font-size: 1.55rem;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .workplace-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+    max-width: 690px;
+    margin: 0 auto;
+  }
+
+  .workplace-text-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid rgba(26, 77, 180, 0.12);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 6px 18px rgba(26, 77, 180, 0.05);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .workplace-note {
+    max-width: 820px;
+    margin: 0.75rem auto 1.5rem;
+    padding: 0.85rem 1rem;
+    border-left: 4px solid var(--yellow);
+    border-radius: 8px;
+    background: rgba(245, 184, 46, 0.14);
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .workplace-cta {
+    max-width: 820px;
+    margin: 0.75rem auto 0;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background: var(--gray);
+    text-align: center;
+  }
+
+  .workplace-cta p {
+    margin-bottom: 1.25rem;
+    font-size: 1.08rem;
+  }
+
+  @media (max-width: 800px) {
+    .workplace-popups {
+      padding-inline: 1rem;
+    }
+
+    .workplace-hero {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      padding-top: 0.5rem;
+    }
+
+    .workplace-hero--banner {
+      display: block;
+    }
+
+    .workplace-hero--text-only {
+      display: block;
+      padding: 1.5rem 1rem;
+    }
+
+    .workplace-card-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 560px) {
+    .workplace-card-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .workplace-text-card {
+      min-height: auto;
+    }
+
+    .workplace-cta {
+      padding: 1.5rem 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,75 @@
+# Labels and helper copy for the Contact page form.
+# Stable submission keys are defined by each field's name.
+# Do not change field names or inquiry type values casually because they affect
+# Formspree submission keys and conditional form behavior.
+workplace_card:
+  heading: Workplace pop-up or event inquiry?
+  body: Choose a workplace or event inquiry type below, then share your event date, location, setup details, and vendor requirements.
+
+common_fields:
+  - label: Name
+    name: name
+    type: text
+    required: true
+    width: half
+
+  - label: Email
+    name: email
+    type: email
+    required: true
+    width: half
+
+  - label: Inquiry type
+    name: inquiry_type
+    type: select
+    required: true
+    width: full
+
+inquiry_types:
+  - label: General question
+    value: general
+    field_group: general_details
+
+  - label: Product / availability question
+    value: product_availability
+    field_group: general_details
+
+  - label: Workplace pop-up / employee market
+    value: workplace_popup
+    field_group: event_details
+
+  - label: Local maker event / market
+    value: local_event
+    field_group: event_details
+
+field_groups:
+  general_details:
+    heading: Tell me a little more
+    fields:
+      - label: Message
+        name: message
+        type: textarea
+        required: true
+        width: full
+
+  event_details:
+    heading: Event details
+    helper_text: These details help me understand whether KKC is a good fit for your event.
+    fields:
+      - label: Event date
+        name: event_date
+        type: text
+        required: false
+        width: half
+
+      - label: Event location
+        name: event_location
+        type: text
+        required: false
+        width: half
+
+      - label: Event details, setup, and vendor requirements
+        name: event_details
+        type: textarea
+        required: true
+        width: full
