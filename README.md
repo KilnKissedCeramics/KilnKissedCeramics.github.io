@@ -145,7 +145,9 @@ Important behavior:
 
 - The main Events page shows active events only.
 - An event is treated as active until 2 days after its end date.
-- Past events are hidden from the main page after that buffer.
+- Past events move into a compact, collapsible archive after that buffer.
+- The archive groups past events by year and opens details in the existing
+  event lightbox.
 - Event details open in a lightbox.
 - The lightbox can navigate through all events, including past events.
 - Event schema is generated from `_event_data/` through `_includes/schema-events.html`.

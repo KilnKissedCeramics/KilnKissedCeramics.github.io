@@ -17,7 +17,7 @@ schema: events
 
 {% include styles-events.html %} {% assign sorted_events = site.event_data |
 sort: "start_date" %} {% assign now_seconds = "now" | date: "%s" | plus: 0 %} {%
-assign active_event_count = 0 %}
+assign active_event_count = 0 %} {% assign past_event_count = 0 %}
 
 <div class="events-wrap">
   <div class="events-page-card">
@@ -108,7 +108,8 @@ assign active_event_count = 0 %}
           </div>
         </div>
       </article>
-      {% endif %} {% endfor %}
+      {% else %} {% assign past_event_count = past_event_count | plus: 1 %} {%
+      endif %} {% endfor %}
     </section>
 
     {% if active_event_count == 0 %}
@@ -116,6 +117,60 @@ assign active_event_count = 0 %}
       No upcoming events are listed right now. Please check back soon, or follow
       Kiln Kissed Ceramics on Instagram for updates.
     </p>
+    {% endif %}
+
+    {% if past_event_count > 0 %}
+    <section aria-labelledby="past-events-heading" class="events-archive">
+      <details class="events-archive-details">
+        <summary id="past-events-heading">
+          <span>Past Events</span>
+          <span class="events-archive-count">{{ past_event_count }}</span>
+        </summary>
+        <div class="events-archive-content">
+          <p class="events-archive-intro">
+            Browse previous markets, exhibitions, and community events where
+            Kiln Kissed Ceramics has participated.
+          </p>
+          <div class="events-archive-list">
+            {% assign reversed_events = sorted_events | reverse %} {% assign
+            archive_year = "" %} {% for event in reversed_events %} {% assign
+            buffer_days = event.status_buffer_days | default: 2 %} {% assign
+            buffer_seconds = buffer_days | times: 86400 %} {% assign
+            event_end_seconds = event.end_date | date: "%s" | plus: 0 %} {%
+            assign active_until_seconds = event_end_seconds | plus:
+            buffer_seconds %} {% if active_until_seconds < now_seconds %} {%
+            assign event_year = event.start_date | date: "%Y" %} {% if
+            event_year != archive_year %}
+            <h3 class="events-archive-year">{{ event_year }}</h3>
+            {% assign archive_year = event_year %} {% endif %}
+            <button
+              aria-label="View details for {{ event.title | escape }}"
+              class="events-archive-item"
+              data-event-open="{{ event.slug }}"
+              data-event-open-source="past_events_archive"
+              type="button"
+            >
+              <time
+                class="events-archive-date"
+                datetime="{{ event.start_date | date: '%Y-%m-%d' }}"
+              >
+                {{ event.start_date | date: "%b %-d" }}
+              </time>
+              <span class="events-archive-event">
+                <span class="events-archive-title">{{ event.title }}</span>
+                <span class="events-archive-meta"
+                  >{{ event.venue }} · {{ event.locality }}</span
+                >
+              </span>
+              <span aria-hidden="true" class="events-archive-action"
+                >View details →</span
+              >
+            </button>
+            {% endif %} {% endfor %}
+          </div>
+        </div>
+      </details>
+    </section>
     {% endif %}
   </div>
 </div>
