@@ -1,5 +1,5 @@
 ---
-title: "Art In Clay - Ceramics Exhibition and Sale 2025"
+title: "OVCAG Art In Clay - Ceramics Exhibition and Sale 2025"
 slug: "art-in-clay-ceramics-exhibition-and-sale-2025"
 start_date: 2025-11-08
 end_date: 2025-11-09
