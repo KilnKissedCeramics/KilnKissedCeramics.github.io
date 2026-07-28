@@ -4,3 +4,6 @@ url: "https://www.kilnkissedceramics.com"
 collections:
   event_data:
     output: false
+
+exclude:
+  - AGENTS.md
