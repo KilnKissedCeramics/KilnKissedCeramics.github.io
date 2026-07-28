@@ -64,7 +64,6 @@ Shared layout and includes:
   - `_includes/styles-gallery.html`
   - `_includes/styles-contact.html`
   - `_includes/styles-workplace-popups.html`
-  - `_includes/lightbox-home.html`
   - `_includes/lightbox-gallery.html`
   - `_includes/schema-localbusiness.html`
   - `_includes/schema-home.html`

@@ -33,9 +33,7 @@
     {% unless page.hide_nav_script %}
     {% include nav-script.html %}
     {% endunless %}
-    {% if page.lightbox == "home" %}
-    {% include lightbox-home.html %}
-    {% elsif page.lightbox == "gallery" %}
+    {% if page.lightbox == "gallery" %}
     {% include lightbox-gallery.html %}
     {% endif %}
   </body>
