@@ -1,5 +1,5 @@
 ---
-title: "SJMADE Holiday Fair"
+title: "SJMADE Holiday Fair 2026"
 slug: "sjmade-holiday-fair-2026"
 start_date: 2026-11-27
 end_date: 2026-11-28

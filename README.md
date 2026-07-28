@@ -53,6 +53,9 @@ Shared layout and includes:
 - `_includes/head.html` renders shared metadata, favicons, canonical links, Open Graph, Twitter metadata, and the shared stylesheet.
 - `_includes/header.html` and `_includes/footer.html` render the shared site chrome.
 - `_includes/nav-script.html` handles the mobile navigation drawer.
+- `_includes/buy-in-person.html` renders the shared "Buy in Person" card used
+  by both the Home and Shop pages. Edit this include rather than duplicating or
+  changing the section separately on either page.
 - Page-specific includes are used where helpful, such as:
   - `_includes/styles-home.html`
   - `_includes/styles-about.html`
@@ -92,7 +95,9 @@ The site includes a direct-link landing page for workplace pop-ups:
 /pop-ups/workplace/
 ```
 
-This page is intentionally **not** in the main navigation or footer. It is linked from the Home page "Buy in Person" section and can also be shared directly.
+This page is intentionally **not** in the main navigation or footer. It is
+linked from the shared "Buy in Person" section on both the Home and Shop pages
+and can also be shared directly.
 
 The workplace page CTA buttons link to the Contact form with a query parameter and anchor:
 
@@ -146,8 +151,15 @@ Important behavior:
 - The main Events page shows active events only.
 - An event is treated as active until 2 days after its end date.
 - Past events move into a compact, collapsible archive after that buffer.
-- The archive groups past events by year and opens details in the existing
-  event lightbox.
+- The archive groups past events by year, shows a dynamic count for each year,
+  expands the current year by default, and keeps older years collapsed.
+- If the current year has no past events, the newest available year expands
+  instead.
+- Archived event details open in the existing event lightbox.
+- Section links near the top of the Events page show dynamic upcoming and past
+  event counts.
+- Links to `/events/#past-events` automatically expand the archive; the Home
+  and Shop "Buy in Person" sections use this deep link.
 - Event details open in a lightbox.
 - The lightbox can navigate through all events, including past events.
 - Event schema is generated from `_event_data/` through `_includes/schema-events.html`.

@@ -32,11 +32,60 @@
     line-height: 1.7;
   }
 
+  .events-section-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 0 auto 1.5rem;
+  }
+
+  .events-section-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid rgba(26, 77, 180, 0.16);
+    border-radius: 999px;
+    background: #ffffff;
+    color: #1a4db4;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      border-color 0.2s ease,
+      background 0.2s ease,
+      transform 0.06s ease;
+  }
+
+  .events-section-nav a:hover,
+  .events-section-nav a:focus-visible {
+    border-color: rgba(26, 77, 180, 0.34);
+    background: #f5f8ff;
+    transform: translateY(-1px);
+  }
+
+  .events-section-count {
+    display: inline-flex;
+    min-width: 1.65rem;
+    height: 1.65rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.4rem;
+    border-radius: 999px;
+    background: rgba(26, 77, 180, 0.08);
+    font-size: 0.82rem;
+  }
+
+  #upcoming-events,
+  #past-events {
+    scroll-margin-top: 1rem;
+  }
+
   .events-list {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    margin-top: 1.5rem;
+    margin-top: 0;
   }
 
   .event-card {
@@ -242,18 +291,71 @@
   .events-archive-list {
     display: flex;
     flex-direction: column;
-    gap: 0.55rem;
+    gap: 0.75rem;
   }
 
-  .events-archive-year {
-    margin: 1rem 0 0.15rem;
-    color: #333333;
+  .events-archive-year-group {
+    overflow: hidden;
+    border: 1px solid rgba(26, 77, 180, 0.12);
+    border-radius: 12px;
+    background: #ffffff;
+  }
+
+  .events-archive-year-group > summary {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.8rem 0.95rem;
+    color: #1a4db4;
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .events-archive-year-group > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .events-archive-year-group > summary::after {
+    content: "+";
+    margin-left: auto;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .events-archive-year-group[open] > summary::after {
+    content: "−";
+  }
+
+  .events-archive-year-group > summary:hover,
+  .events-archive-year-group > summary:focus-visible {
+    background: rgba(26, 77, 180, 0.04);
+  }
+
+  .events-archive-year-label {
     font-size: 1rem;
     line-height: 1.2;
   }
 
-  .events-archive-year:first-child {
-    margin-top: 0;
+  .events-archive-year-count {
+    display: inline-flex;
+    min-width: 1.6rem;
+    height: 1.6rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.4rem;
+    border-radius: 999px;
+    background: rgba(26, 77, 180, 0.08);
+    font-size: 0.8rem;
+  }
+
+  .events-archive-year-events {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 0.65rem;
+    border-top: 1px solid rgba(26, 77, 180, 0.1);
   }
 
   .events-archive-item {

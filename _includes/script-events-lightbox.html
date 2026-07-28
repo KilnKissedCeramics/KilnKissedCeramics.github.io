@@ -26,9 +26,45 @@
     var address = lightbox.querySelector("[data-event-lightbox-address]");
     var description = lightbox.querySelector("[data-event-lightbox-description]");
     var externalLink = lightbox.querySelector("[data-event-lightbox-external]");
+    var archiveDetails = document.querySelector("[data-past-events-details]");
+    var defaultArchiveYear = document.querySelector(
+      "[data-default-past-year]"
+    );
+    var archiveSection = document.getElementById("past-events");
+    var archiveLink = document.querySelector(
+      '.events-section-nav a[href="#past-events"]'
+    );
 
     var currentIndex = -1;
     var lastTrigger = null;
+
+    function openAndPositionArchive() {
+      if (!archiveDetails || !archiveSection) return;
+      archiveDetails.open = true;
+      if (defaultArchiveYear) {
+        defaultArchiveYear.open = true;
+      }
+      window.requestAnimationFrame(function () {
+        archiveSection.scrollIntoView({ block: "start" });
+      });
+    }
+
+    function openArchiveFromHash() {
+      if (window.location.hash === "#past-events") {
+        openAndPositionArchive();
+      }
+    }
+
+    if (archiveLink) {
+      archiveLink.addEventListener("click", function (clickEvent) {
+        clickEvent.preventDefault();
+        window.history.pushState(null, "", "#past-events");
+        openAndPositionArchive();
+      });
+    }
+
+    openArchiveFromHash();
+    window.addEventListener("hashchange", openArchiveFromHash);
 
     function pushDataLayer(payload) {
       window.dataLayer = window.dataLayer || [];

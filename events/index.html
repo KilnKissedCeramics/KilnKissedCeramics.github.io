@@ -15,29 +15,67 @@ twitter_card: "summary_large_image"
 schema: events
 ---
 
-{% include styles-events.html %} {% assign sorted_events = site.event_data |
-sort: "start_date" %} {% assign now_seconds = "now" | date: "%s" | plus: 0 %} {%
-assign active_event_count = 0 %} {% assign past_event_count = 0 %}
+{% include styles-events.html %}
+{% assign sorted_events = site.event_data | sort: "start_date" %}
+{% assign now_seconds = "now" | date: "%s" | plus: 0 %}
+{% assign current_year = "now" | date: "%Y" %}
+{% assign active_event_count = 0 %}
+{% assign past_event_count = 0 %}
+{% assign current_year_past_count = 0 %}
+{% assign newest_past_year = "" %}
+{% for event in sorted_events %}
+  {% assign buffer_days = event.status_buffer_days | default: 2 %}
+  {% assign buffer_seconds = buffer_days | times: 86400 %}
+  {% assign event_end_seconds = event.end_date | date: "%s" | plus: 0 %}
+  {% assign active_until_seconds = event_end_seconds | plus: buffer_seconds %}
+  {% if active_until_seconds >= now_seconds %}
+    {% assign active_event_count = active_event_count | plus: 1 %}
+  {% else %}
+    {% assign past_event_count = past_event_count | plus: 1 %}
+    {% assign event_year = event.start_date | date: "%Y" %}
+    {% assign newest_past_year = event_year %}
+    {% if event_year == current_year %}
+      {% assign current_year_past_count = current_year_past_count | plus: 1 %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+{% assign default_archive_year = newest_past_year %}
+{% if current_year_past_count > 0 %}
+  {% assign default_archive_year = current_year %}
+{% endif %}
 
 <div class="events-wrap">
   <div class="events-page-card">
-    <h1>Upcoming Events</h1>
+    <h1>Events</h1>
     <p class="events-intro">
       Come shop Kiln Kissed Ceramics at upcoming local markets and ceramic art
       events across the South Bay.
     </p>
 
+    <nav aria-label="Event sections" class="events-section-nav">
+      <a href="#upcoming-events">
+        <span>Upcoming Events</span>
+        <span class="events-section-count">{{ active_event_count }}</span>
+      </a>
+      {% if past_event_count > 0 %}
+      <a href="#past-events">
+        <span>Past Events</span>
+        <span class="events-section-count">{{ past_event_count }}</span>
+      </a>
+      {% endif %}
+    </nav>
+
     <section
       aria-label="Upcoming Kiln Kissed Ceramics events"
       class="events-list"
+      id="upcoming-events"
     >
       {% for event in sorted_events %} {% assign buffer_days =
       event.status_buffer_days | default: 2 %} {% assign buffer_seconds =
       buffer_days | times: 86400 %} {% assign event_end_seconds = event.end_date
       | date: "%s" | plus: 0 %} {% assign active_until_seconds =
       event_end_seconds | plus: buffer_seconds %} {% if active_until_seconds >=
-      now_seconds %} {% assign active_event_count = active_event_count | plus: 1
-      %}
+      now_seconds %}
       <article class="event-card" id="event-{{ event.slug }}">
         <button
           aria-label="View details for {{ event.title | escape }}"
@@ -108,8 +146,7 @@ assign active_event_count = 0 %} {% assign past_event_count = 0 %}
           </div>
         </div>
       </article>
-      {% else %} {% assign past_event_count = past_event_count | plus: 1 %} {%
-      endif %} {% endfor %}
+      {% endif %} {% endfor %}
     </section>
 
     {% if active_event_count == 0 %}
@@ -117,11 +154,13 @@ assign active_event_count = 0 %} {% assign past_event_count = 0 %}
       No upcoming events are listed right now. Please check back soon, or follow
       Kiln Kissed Ceramics on Instagram for updates.
     </p>
-    {% endif %}
-
-    {% if past_event_count > 0 %}
-    <section aria-labelledby="past-events-heading" class="events-archive">
-      <details class="events-archive-details">
+    {% endif %} {% if past_event_count > 0 %}
+    <section
+      aria-labelledby="past-events-heading"
+      class="events-archive"
+      id="past-events"
+    >
+      <details class="events-archive-details" data-past-events-details>
         <summary id="past-events-heading">
           <span>Past Events</span>
           <span class="events-archive-count">{{ past_event_count }}</span>
@@ -132,17 +171,50 @@ assign active_event_count = 0 %} {% assign past_event_count = 0 %}
             Kiln Kissed Ceramics has participated.
           </p>
           <div class="events-archive-list">
-            {% assign reversed_events = sorted_events | reverse %} {% assign
-            archive_year = "" %} {% for event in reversed_events %} {% assign
-            buffer_days = event.status_buffer_days | default: 2 %} {% assign
-            buffer_seconds = buffer_days | times: 86400 %} {% assign
-            event_end_seconds = event.end_date | date: "%s" | plus: 0 %} {%
-            assign active_until_seconds = event_end_seconds | plus:
-            buffer_seconds %} {% if active_until_seconds < now_seconds %} {%
-            assign event_year = event.start_date | date: "%Y" %} {% if
-            event_year != archive_year %}
-            <h3 class="events-archive-year">{{ event_year }}</h3>
-            {% assign archive_year = event_year %} {% endif %}
+            {% assign reversed_events = sorted_events | reverse %}
+            {% assign archive_year = "" %}
+            {% for event in reversed_events %}
+              {% assign buffer_days = event.status_buffer_days | default: 2 %}
+              {% assign buffer_seconds = buffer_days | times: 86400 %}
+              {% assign event_end_seconds = event.end_date | date: "%s" | plus: 0 %}
+              {% assign active_until_seconds = event_end_seconds | plus: buffer_seconds %}
+              {% if active_until_seconds < now_seconds %}
+                {% assign event_year = event.start_date | date: "%Y" %}
+                {% if event_year != archive_year %}
+                  {% unless archive_year == "" %}
+                    </div>
+                  </details>
+                  {% endunless %}
+                  {% assign archive_year_count = 0 %}
+                  {% for count_event in reversed_events %}
+                    {% assign count_buffer_days = count_event.status_buffer_days | default: 2 %}
+                    {% assign count_buffer_seconds = count_buffer_days | times: 86400 %}
+                    {% assign count_end_seconds = count_event.end_date | date: "%s" | plus: 0 %}
+                    {% assign count_active_until_seconds = count_end_seconds | plus: count_buffer_seconds %}
+                    {% assign count_event_year = count_event.start_date | date: "%Y" %}
+                    {% if count_active_until_seconds < now_seconds and count_event_year == event_year %}
+                      {% assign archive_year_count = archive_year_count | plus: 1 %}
+                    {% endif %}
+                  {% endfor %}
+                  {% assign archive_year_count_label = "events" %}
+                  {% if archive_year_count == 1 %}
+                    {% assign archive_year_count_label = "event" %}
+                  {% endif %}
+                  <details
+                    class="events-archive-year-group"
+                    {% if event_year == default_archive_year %}data-default-past-year open{% endif %}
+                  >
+                    <summary>
+                      <span class="events-archive-year-label">{{ event_year }}</span>
+                      <span
+                        aria-label="{{ archive_year_count }} {{ archive_year_count_label }}"
+                        class="events-archive-year-count"
+                        >{{ archive_year_count }}</span
+                      >
+                    </summary>
+                    <div class="events-archive-year-events">
+                  {% assign archive_year = event_year %}
+                {% endif %}
             <button
               aria-label="View details for {{ event.title | escape }}"
               class="events-archive-item"
@@ -166,7 +238,12 @@ assign active_event_count = 0 %} {% assign past_event_count = 0 %}
                 >View details →</span
               >
             </button>
-            {% endif %} {% endfor %}
+              {% endif %}
+            {% endfor %}
+            {% unless archive_year == "" %}
+              </div>
+            </details>
+            {% endunless %}
           </div>
         </div>
       </details>
