@@ -13,32 +13,150 @@ home_styles: true
 schema: home
 ---
 
-<section class="hero">
-  <picture>
-    <source
-      sizes="100vw"
-      srcset="
-        assets/banner/banner-400.webp   400w,
-        assets/banner/banner-800.webp   800w,
-        assets/banner/banner-1200.webp 1200w,
-        assets/banner/banner-1600.webp 1600w
-      "
-      type="image/webp"
-    />
-    <img
-      alt="Kiln Kissed Ceramics by Bhavya Kothari Sunnyvale CA"
-      sizes="100vw"
-      src="assets/banner/banner-1200.jpg"
-      srcset="
-        assets/banner/banner-400.jpg   400w,
-        assets/banner/banner-800.jpg   800w,
-        assets/banner/banner-1200.jpg 1200w,
-        assets/banner/banner-1600.jpg 1600w
-      "
-      style="width: 100%; height: auto"
-    />
-  </picture>
+{% include styles-event-components.html %}
+{% assign sorted_events = site.event_data | sort: "start_date" %}
+{% assign now_seconds = "now" | date: "%s" | plus: 0 %}
+{% assign active_event_count = 0 %}
+{% for event in sorted_events %}
+  {% assign buffer_days = event.status_buffer_days | default: 2 %}
+  {% assign buffer_seconds = buffer_days | times: 86400 %}
+  {% assign event_end_seconds = event.end_date | date: "%s" | plus: 0 %}
+  {% assign active_until_seconds = event_end_seconds | plus: buffer_seconds %}
+  {% if active_until_seconds >= now_seconds %}
+    {% assign active_event_count = active_event_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
+{% assign carousel_slide_count = active_event_count | plus: 1 %}
+
+<section
+  aria-label="Featured Kiln Kissed Ceramics content"
+  aria-roledescription="carousel"
+  class="home-events-carousel"
+  data-home-events-carousel
+>
+  <div class="home-carousel-stage">
+    <div
+      aria-label="Use the Previous and Next buttons or the left and right arrow keys to browse"
+      class="home-carousel-viewport"
+      data-carousel-viewport
+      tabindex="0"
+    >
+      <div class="home-carousel-track" data-carousel-track>
+        <div
+          aria-hidden="false"
+          aria-label="Kiln Kissed Ceramics pottery"
+          aria-roledescription="slide"
+          class="home-carousel-slide home-carousel-banner-slide"
+          data-carousel-slide
+          data-slide-type="pottery_banner"
+          role="group"
+        >
+          <div class="hero">
+            <picture>
+              <source
+                sizes="100vw"
+                srcset="
+                  assets/banner/banner-400.webp   400w,
+                  assets/banner/banner-800.webp   800w,
+                  assets/banner/banner-1200.webp 1200w,
+                  assets/banner/banner-1600.webp 1600w
+                "
+                type="image/webp"
+              />
+              <img
+                alt="Kiln Kissed Ceramics by Bhavya Kothari Sunnyvale CA"
+                sizes="100vw"
+                src="assets/banner/banner-1200.jpg"
+                srcset="
+                  assets/banner/banner-400.jpg   400w,
+                  assets/banner/banner-800.jpg   800w,
+                  assets/banner/banner-1200.jpg 1200w,
+                  assets/banner/banner-1600.jpg 1600w
+                "
+                style="width: 100%; height: auto"
+              />
+            </picture>
+          </div>
+        </div>
+
+        {% for event in sorted_events %}
+          {% assign buffer_days = event.status_buffer_days | default: 2 %}
+          {% assign buffer_seconds = buffer_days | times: 86400 %}
+          {% assign event_end_seconds = event.end_date | date: "%s" | plus: 0 %}
+          {% assign active_until_seconds = event_end_seconds | plus: buffer_seconds %}
+          {% if active_until_seconds >= now_seconds %}
+            <div
+              aria-hidden="true"
+              aria-label="{{ event.title | escape }}"
+              aria-roledescription="slide"
+              class="home-carousel-slide home-carousel-event-slide"
+              data-carousel-slide
+              data-event-slug="{{ event.slug }}"
+              data-slide-type="upcoming_event"
+              inert
+              role="group"
+            >
+              {% include event-card.html event=event card_class="home-carousel-event-card" id_prefix="home-event" open_context="home_carousel" %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+
+  {% if active_event_count > 0 %}
+  <div aria-label="Carousel navigation" class="home-carousel-controls">
+    <button
+      aria-label="Show previous slide"
+      class="home-carousel-arrow home-carousel-previous"
+      data-carousel-previous
+      disabled
+      type="button"
+    >
+      ← Previous
+    </button>
+    <div aria-label="Choose a slide" class="home-carousel-dots">
+      <button
+        aria-current="true"
+        aria-label="Show slide 1: Kiln Kissed Ceramics pottery"
+        class="home-carousel-dot"
+        data-carousel-dot="0"
+        type="button"
+      ></button>
+      {% assign carousel_dot_index = 1 %}
+      {% for event in sorted_events %}
+        {% assign buffer_days = event.status_buffer_days | default: 2 %}
+        {% assign buffer_seconds = buffer_days | times: 86400 %}
+        {% assign event_end_seconds = event.end_date | date: "%s" | plus: 0 %}
+        {% assign active_until_seconds = event_end_seconds | plus: buffer_seconds %}
+        {% if active_until_seconds >= now_seconds %}
+          <button
+            aria-current="false"
+            aria-label="Show slide {{ carousel_dot_index | plus: 1 }}: {{ event.title | escape }}"
+            class="home-carousel-dot"
+            data-carousel-dot="{{ carousel_dot_index }}"
+            type="button"
+          ></button>
+          {% assign carousel_dot_index = carousel_dot_index | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    </div>
+    <span aria-live="polite" class="home-carousel-position">
+      Slide <span data-carousel-current>1</span> of {{ carousel_slide_count }}
+    </span>
+    <button
+      aria-label="Show next slide"
+      class="home-carousel-arrow home-carousel-next"
+      data-carousel-next
+      type="button"
+    >
+      Next →
+    </button>
+  </div>
+  {% endif %}
 </section>
+
 <section class="intro">
   <div class="prose">
     <p>
@@ -57,3 +175,8 @@ schema: home
   </div>
 </section>
 {% include buy-in-person.html %}
+
+{% if active_event_count > 0 %}
+  {% include event-lightbox.html events=sorted_events now_seconds=now_seconds active_only=true %}
+  {% include script-home-events-carousel.html %}
+{% endif %}

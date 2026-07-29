@@ -56,6 +56,8 @@ Shared layout and includes:
 - `_includes/buy-in-person.html` renders the shared "Buy in Person" card used
   by both the Home and Shop pages. Edit this include rather than duplicating or
   changing the section separately on either page.
+- `_includes/event-card.html` and `_includes/event-lightbox.html` render the
+  event card and details viewer shared by the Home and Events pages.
 - Page-specific includes are used where helpful, such as:
   - `_includes/styles-home.html`
   - `_includes/styles-about.html`
@@ -64,7 +66,9 @@ Shared layout and includes:
   - `_includes/styles-gallery.html`
   - `_includes/styles-contact.html`
   - `_includes/styles-workplace-popups.html`
+  - `_includes/styles-event-components.html`
   - `_includes/lightbox-gallery.html`
+  - `_includes/script-home-events-carousel.html`
   - `_includes/schema-localbusiness.html`
   - `_includes/schema-home.html`
   - `_includes/schema-events.html`
@@ -164,6 +168,20 @@ Important behavior:
 - Event schema is generated from `_event_data/` through `_includes/schema-events.html`.
 - Events use `dataLayer.push()` analytics events only; GA4 is handled through GTM.
 
+The Home page uses the same event data and active-event calculation in a
+manual carousel:
+
+- The existing pottery banner is the first slide.
+- Each active event appears as a complete event-card slide on desktop. Mobile
+  uses a compact card that omits the address; "View details" opens the complete
+  event information.
+- The carousel has side Previous/Next controls on desktop, below-carousel
+  controls on mobile, slide dots, keyboard navigation, and mobile swipe
+  navigation; it does not advance automatically.
+- Event cards and the details lightbox are shared with the Events page.
+- When no events are active, the original pottery banner appears without
+  carousel controls.
+
 Event images are organized under event-specific folders, for example:
 
 ```text
@@ -217,6 +235,7 @@ Current lightbox/event interaction examples include:
 - `event_lightbox_navigate`
 - `event_lightbox_close`
 - `event_external_click`
+- `home_event_carousel_navigate`
 
 All analytics configuration, tags, triggers, and variables live in GTM, **not** in this repo.
 

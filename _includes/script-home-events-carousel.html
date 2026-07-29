@@ -1,0 +1,126 @@
+<script>
+  (function () {
+    var carousel = document.querySelector("[data-home-events-carousel]");
+    if (!carousel) return;
+
+    var track = carousel.querySelector("[data-carousel-track]");
+    var slides = Array.prototype.slice.call(
+      carousel.querySelectorAll("[data-carousel-slide]")
+    );
+    var previousButton = carousel.querySelector("[data-carousel-previous]");
+    var nextButton = carousel.querySelector("[data-carousel-next]");
+    var dots = Array.prototype.slice.call(
+      carousel.querySelectorAll("[data-carousel-dot]")
+    );
+    var currentLabel = carousel.querySelector("[data-carousel-current]");
+    var viewport = carousel.querySelector("[data-carousel-viewport]");
+    var currentIndex = 0;
+    var touchStartX = null;
+
+    if (!track || slides.length < 2) return;
+
+    function updateTrackHeight() {
+      track.style.height = slides[currentIndex].offsetHeight + "px";
+    }
+
+    function pushNavigationEvent(source) {
+      var slide = slides[currentIndex];
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "home_event_carousel_navigate",
+        carousel_navigation_source: source,
+        carousel_slide_index: currentIndex + 1,
+        carousel_slide_type: slide.getAttribute("data-slide-type"),
+        event_slug: slide.getAttribute("data-event-slug") || undefined
+      });
+    }
+
+    function showSlide(index, source) {
+      if (index < 0 || index >= slides.length || index === currentIndex) return;
+      currentIndex = index;
+      track.style.transform = "translateX(-" + currentIndex * 100 + "%)";
+
+      slides.forEach(function (slide, slideIndex) {
+        var active = slideIndex === currentIndex;
+        slide.setAttribute("aria-hidden", active ? "false" : "true");
+        if (active) {
+          slide.removeAttribute("inert");
+        } else {
+          slide.setAttribute("inert", "");
+        }
+      });
+
+      dots.forEach(function (dot, dotIndex) {
+        var active = dotIndex === currentIndex;
+        dot.setAttribute("aria-current", active ? "true" : "false");
+      });
+
+      previousButton.disabled = currentIndex === 0;
+      nextButton.disabled = currentIndex === slides.length - 1;
+      currentLabel.textContent = currentIndex + 1;
+      window.requestAnimationFrame(updateTrackHeight);
+      pushNavigationEvent(source);
+    }
+
+    previousButton.addEventListener("click", function () {
+      showSlide(currentIndex - 1, "previous_button");
+    });
+
+    nextButton.addEventListener("click", function () {
+      showSlide(currentIndex + 1, "next_button");
+    });
+
+    dots.forEach(function (dot) {
+      dot.addEventListener("click", function () {
+        showSlide(Number(dot.getAttribute("data-carousel-dot")), "dot");
+      });
+    });
+
+    viewport.addEventListener("keydown", function (event) {
+      if (event.target !== viewport) return;
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        showSlide(currentIndex - 1, "keyboard");
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        showSlide(currentIndex + 1, "keyboard");
+      }
+    });
+
+    viewport.addEventListener(
+      "touchstart",
+      function (event) {
+        touchStartX = event.changedTouches[0].clientX;
+      },
+      { passive: true },
+    );
+
+    viewport.addEventListener(
+      "touchend",
+      function (event) {
+        if (touchStartX === null) return;
+        var distance = event.changedTouches[0].clientX - touchStartX;
+        touchStartX = null;
+        if (Math.abs(distance) < 45) return;
+        showSlide(
+          currentIndex + (distance < 0 ? 1 : -1),
+          "swipe"
+        );
+      },
+      { passive: true },
+    );
+
+    carousel.addEventListener(
+      "load",
+      function (event) {
+        if (event.target.tagName === "IMG") {
+          updateTrackHeight();
+        }
+      },
+      true,
+    );
+
+    window.addEventListener("resize", updateTrackHeight);
+    window.requestAnimationFrame(updateTrackHeight);
+  })();
+</script>

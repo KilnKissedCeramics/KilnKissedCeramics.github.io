@@ -1,0 +1,74 @@
+{% assign event = include.event %}
+{% assign card_id_prefix = include.id_prefix | default: "event" %}
+{% assign open_context = include.open_context | default: "" %}
+<article
+  class="event-card{% if include.card_class %} {{ include.card_class }}{% endif %}"
+  id="{{ card_id_prefix }}-{{ event.slug }}"
+>
+  <button
+    aria-label="View details for {{ event.title | escape }}"
+    class="event-image-button"
+    data-event-open="{{ event.slug }}"
+    data-event-open-source="{% if open_context != '' %}{{ open_context }}_image{% else %}image{% endif %}"
+    type="button"
+  >
+    <img
+      alt="{{ event.image_alt | escape }}"
+      loading="lazy"
+      src="{{ event.image | relative_url }}"
+    />
+  </button>
+  <div class="event-description">
+    <h2>
+      <button
+        class="event-title-button"
+        data-event-open="{{ event.slug }}"
+        data-event-open-source="{% if open_context != '' %}{{ open_context }}_title{% else %}title{% endif %}"
+        type="button"
+      >
+        {{ event.title }}
+      </button>
+    </h2>
+    <button
+      class="event-text-button"
+      data-event-open="{{ event.slug }}"
+      data-event-open-source="{% if open_context != '' %}{{ open_context }}_details_text{% else %}details_text{% endif %}"
+      type="button"
+    >
+      <span class="event-meta-row"
+        ><strong>When:</strong> {{ event.display_date }}</span
+      >
+      {% if event.time %}<span class="event-meta-row"
+        ><strong>Time:</strong> {{ event.time }}</span
+      >{% endif %}
+      <span class="event-meta-row"
+        ><strong>Where:</strong> {{ event.venue }}</span
+      >
+      <span class="event-meta-row event-address-row"
+        ><strong>Address:</strong> {{ event.address }}</span
+      >
+      <span class="event-note">{{ event.content | strip_html | strip }}</span>
+    </button>
+    <div class="event-actions">
+      <button
+        class="event-details-button"
+        data-event-open="{{ event.slug }}"
+        data-event-open-source="{% if open_context != '' %}{{ open_context }}_view_details_button{% else %}view_details_button{% endif %}"
+        type="button"
+      >
+        View details
+      </button>
+      {% if event.external_url %}
+      <a
+        class="event-external-link"
+        data-event-external-link
+        data-event-slug="{{ event.slug }}"
+        href="{{ event.external_url }}"
+        rel="noopener"
+        target="_blank"
+        >{{ event.external_label | default: "Event website" }}</a
+      >
+      {% endif %}
+    </div>
+  </div>
+</article>
