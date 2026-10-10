@@ -24,4 +24,4 @@ organizer_url: "https://ovcag.wildapricot.org/"
 status_buffer_days: 2
 ---
 
-A fall ceramic arts sale featuring local clay artists and handmade pieces.
+Shop handmade ceramics from 40+ local clay artists at OVCAG’s two-day Fall Art in Clay Sale.

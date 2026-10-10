@@ -24,4 +24,4 @@ organizer_url: "https://www.sanjosemade.com/"
 status_buffer_days: 2
 ---
 
-A holiday shopping event for handmade gifts, small-batch ceramics, and local finds.
+Shop 350+ makers, artists, designers, and small businesses at one of the Bay Area’s biggest holiday craft fairs. Free admission, indoors, with free parking.
