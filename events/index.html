@@ -47,7 +47,7 @@ schema: events
 
 <div class="events-wrap">
   <div class="events-page-card">
-    <h1>Events</h1>
+    <h1 class="events-page-title">Events</h1>
     <p class="events-intro">
       Come shop Kiln Kissed Ceramics at upcoming local markets and ceramic art
       events across the South Bay.
@@ -55,12 +55,12 @@ schema: events
 
     <nav aria-label="Event sections" class="events-section-nav">
       <a href="#upcoming-events">
-        <span>Upcoming Events</span>
+        <span>Upcoming</span>
         <span class="events-section-count">{{ active_event_count }}</span>
       </a>
       {% if past_event_count > 0 %}
       <a href="#past-events">
-        <span>Past Events</span>
+        <span>Past</span>
         <span class="events-section-count">{{ past_event_count }}</span>
       </a>
       {% endif %}
@@ -94,7 +94,7 @@ schema: events
     >
       <details class="events-archive-details" data-past-events-details>
         <summary id="past-events-heading">
-          <span>Past Events</span>
+          <span>Past</span>
           <span class="events-archive-count">{{ past_event_count }}</span>
         </summary>
         <div class="events-archive-content">

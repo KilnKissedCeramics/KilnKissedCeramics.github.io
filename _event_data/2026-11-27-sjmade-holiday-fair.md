@@ -17,11 +17,11 @@ country: "US"
 address: "5001 Great America Pkwy, Santa Clara, CA 95054"
 external_url: "https://www.sanjosemade.com/pages/sjmade-holiday-fair-2026"
 external_label: "Visit SJMADE Holiday Fair website"
-image: "/events/2026/sjmade-holiday-fair/sjmade-holiday-fair-2026.webp"
-image_alt: "SJMADE Holiday Fair 2026 event image"
+image: "/events/2026/sjmade-holiday-fair/sjmade-holiday-fair-2026-new.webp"
+image_alt: "Colorful illustrated SJMADE Holiday Fair 2026 poster: November 27–28, 11 AM–6 PM each day, free entry at Santa Clara Convention Center"
 organizer: "San Jose Made"
 organizer_url: "https://www.sanjosemade.com/"
 status_buffer_days: 1
 ---
 
-Shop 350+ makers, artists, designers, and small businesses at one of the Bay Area’s biggest holiday craft fairs. Free admission, indoors, with free parking.
+Shop 350+ makers, artists, designers, and small businesses at one of the Bay Area’s biggest holiday craft fairs. Free admission, indoors, with free parking in the convention center garage and neighboring Tasman garage. Service animals only.

@@ -20,7 +20,7 @@ external_label: ""
 image: "/assets/logo.jpg"
 image_alt: "Kiln Kissed Ceramics logo"
 organizer: "Everpure"
-organizer_url: ""
+organizer_url: "https://www.everpuredata.com/"
 status_buffer_days: 2
 ---
 
