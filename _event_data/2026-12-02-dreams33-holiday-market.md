@@ -21,7 +21,7 @@ image: "/events/2026/dreams33-holiday-market/dreams33-holiday-market-2026.png"
 image_alt: "Dreams33 Holiday Open House and Local Market flyer, December 2, 2026, 5–8 PM at 142 Stambaugh Street, Redwood City"
 organizer: "Dreams33"
 organizer_url: "https://dreams33.org/"
-status_buffer_days: 2
+status_buffer_days: 1
 ---
 
 Shop Kiln Kissed Ceramics alongside a curated group of local makers offering unique holiday gifts. A portion of the evening’s sales will support Dreams33 scholars.

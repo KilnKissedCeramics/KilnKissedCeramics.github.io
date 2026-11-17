@@ -21,7 +21,7 @@ image: "/events/2026/makers-market-santana-row-december/makers-market-santana-ro
 image_alt: "Makers Market Local Artist Street Fair at Santana Row on December 12 promotional image"
 organizer: "Makers Market"
 organizer_url: "https://makersmarket.us/"
-status_buffer_days: 2
+status_buffer_days: 1
 ---
 
 Shop 65+ local makers and handmade finds at Santana Row, with pottery, jewelry, candles, apparel, live music, and plenty of holiday shopping.

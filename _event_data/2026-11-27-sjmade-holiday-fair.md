@@ -21,7 +21,7 @@ image: "/events/2026/sjmade-holiday-fair/sjmade-holiday-fair-2026.webp"
 image_alt: "SJMADE Holiday Fair 2026 event image"
 organizer: "San Jose Made"
 organizer_url: "https://www.sanjosemade.com/"
-status_buffer_days: 2
+status_buffer_days: 1
 ---
 
 Shop 350+ makers, artists, designers, and small businesses at one of the Bay Area’s biggest holiday craft fairs. Free admission, indoors, with free parking.

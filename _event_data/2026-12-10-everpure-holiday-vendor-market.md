@@ -21,7 +21,7 @@ image: "/assets/logo.jpg"
 image_alt: "Kiln Kissed Ceramics logo"
 organizer: "Everpure"
 organizer_url: ""
-status_buffer_days: 2
+status_buffer_days: 1
 ---
 
 Kiln Kissed Ceramics joins Everpure’s Holiday Vendor Market for a festive afternoon of employee shopping. Discover handmade ceramics for thoughtful gifts and seasonal favorites.
